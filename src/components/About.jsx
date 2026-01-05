@@ -80,7 +80,7 @@ const About = () => {
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden gradient-border">
               {/* Profile image */}
               <img 
-                src="/hamza.png" 
+                src={`${import.meta.env.BASE_URL}hamza.png`} 
                 alt="Hamza Ben Marouen"
                 className="absolute inset-0 w-full h-full object-cover"
               />
