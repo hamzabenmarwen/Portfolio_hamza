@@ -1,5 +1,9 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import emailjs from '@emailjs/browser'
+
+// Initialize EmailJS
+emailjs.init('0Zu8VS_SoNrtGcsFQ')
 
 const Contact = () => {
   const sectionRef = useRef(null)
@@ -32,14 +36,32 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormState({ name: '', email: '', subject: '', message: '' })
-    
-    setTimeout(() => setIsSubmitted(false), 5000)
+    try {
+      const response = await emailjs.send(
+        'service_viquypq',
+        'template_z1ml1jl',
+        {
+          to_email: 'hamzabenmarwen@gmail.com',
+          from_name: formState.name,
+          from_email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+        }
+      )
+
+      if (response.status === 200) {
+        setIsSubmitted(true)
+        setFormState({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        alert('Failed to send message. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Error sending message. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
