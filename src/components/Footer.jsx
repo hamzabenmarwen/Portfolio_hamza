@@ -1,109 +1,158 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const [localTime, setLocalTime] = useState('')
 
-  const footerLinks = [
-    {
-      title: 'Navigation',
-      links: [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' },
-      ],
-    },
-    {
-      title: 'Social',
-      links: [
-        { name: 'GitHub', href: 'https://github.com/hamzabenmarwen' },
-        { name: 'LinkedIn', href: 'https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/' },
-      ],
-    },
-    {
-      title: 'Contact',
-      links: [
-        { name: 'hamzabenmarwen@gmail.com', href: 'mailto:hamzabenmarwen@gmail.com' },
-        { name: '+216 53 180 702', href: 'tel:+21653180702' },
-        { name: 'Zaghouan, Tunisia', href: '#' },
-      ],
-    },
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date()
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Africa/Tunis'
+      })
+      setLocalTime(`${timeString} UTC+2`)
+    }
+    
+    updateTime()
+    const interval = setInterval(updateTime, 60000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const links = [
+    { name: 'Home', href: '#home' },
+    { name: 'Work', href: '#projects' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' },
+  ]
+
+  const socials = [
+    { name: 'Email', href: 'mailto:hamzabenmarwen@gmail.com' },
+    { name: 'Linkdin', href: 'https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/' },
+    { name: 'Whatsapp', href: 'https://wa.me/21612345678' },
+    { name: 'Github', href: 'https://github.com/hamzabenmarwen' },
   ]
 
   return (
-    <footer className="relative bg-[var(--color-darker)] border-t border-white/5">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand section */}
-          <div className="lg:col-span-1">
-            <motion.a
-              href="#home"
-              className="text-3xl font-display font-bold gradient-text inline-block mb-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              {'<HBM />'}
-            </motion.a>
-            <p className="text-gray-400 mb-6">
-              Full Stack Developer passionate about creating exceptional digital
-              experiences with MERN, Laravel & Flutter.
-            </p>
-            <div className="flex gap-4">
-              {['GitHub', 'LinkedIn', 'Twitter'].map((social) => (
-                <motion.a
-                  key={social}
-                  href="#"
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  className="w-10 h-10 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-                >
-                  {social[0]}
-                </motion.a>
+    <footer className="relative bg-[#0a0a0a] pt-20 pb-8 overflow-hidden">
+      {/* Top Navigation Bar */}
+      <div className="container-custom">
+        <div className="flex flex-wrap justify-between items-start gap-x-16 gap-y-8 mb-32">
+          {/* Links Column */}
+          <div>
+            <h4 className="text-[#555] text-xs tracking-widest uppercase mb-6">
+              LINKS
+            </h4>
+            <ul className="space-y-2">
+              {links.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-white hover:text-[#888] transition-colors text-sm"
+                  >
+                    {link.name}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Links sections */}
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-white font-display font-semibold mb-4">
-                {section.title}
-              </h4>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors animated-underline"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Socials Column */}
+          <div>
+            <h4 className="text-[#555] text-xs tracking-widest uppercase mb-6">
+              SOCIALS
+            </h4>
+            <ul className="space-y-2">
+              {socials.map((social) => (
+                <li key={social.name}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-[#888] transition-colors text-sm"
+                  >
+                    {social.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Local Time Column */}
+          <div>
+            <h4 className="text-[#555] text-xs tracking-widest uppercase mb-6">
+              LOCAL TIME
+            </h4>
+            <p className="text-white text-sm font-medium">{localTime}</p>
+          </div>
+
+          {/* Version Column */}
+          <div>
+            <h4 className="text-[#555] text-xs tracking-widest uppercase mb-6">
+              VERSION
+            </h4>
+            <p className="text-white text-sm">{currentYear} © Edition</p>
+          </div>
+
+          {/* Contact Buttons - Right Side */}
+          <div className="flex flex-col sm:flex-row gap-3 ml-auto">
+            <a
+              href="tel:+21612345678"
+              className="px-6 py-3 rounded-full bg-[#1a1a1a] text-white text-sm hover:bg-[#222] transition-colors whitespace-nowrap"
+            >
+              +21612345678
+            </a>
+            <a
+              href="mailto:hamzabenmarwen@gmail.com"
+              className="px-6 py-3 rounded-full border border-[#333] text-white text-sm hover:border-[#555] transition-colors whitespace-nowrap"
+            >
+              hamzabenmarwen@gmail.com
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
-              © {currentYear} Hamza Ben Marouen. All rights reserved.
-            </p>
-            <p className="text-gray-500 text-sm">
-              Designed & Built with{' '}
-              <span className="text-red-500">❤️</span> using React & Three.js
-            </p>
-          </div>
-        </div>
+      {/* Large Name at Bottom */}
+      <div className="container-custom">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+          className="relative"
+        >
+          <h2 
+            className="text-[20vw] md:text-[22vw] font-bold text-white leading-[0.85] tracking-[-0.02em] select-none"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            HAMZA
+          </h2>
+        </motion.div>
       </div>
 
-      {/* Decorative gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent opacity-50" />
+      {/* Back to top */}
+      <motion.a
+        href="#home"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-black border border-[#333] flex items-center justify-center hover:border-[#555] transition-colors group"
+      >
+        <svg 
+          className="w-5 h-5 text-white" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </motion.a>
     </footer>
   )
 }
 
 export default Footer
+

@@ -1,325 +1,251 @@
-import { useRef, useMemo, Suspense, useState, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Sphere, MeshDistortMaterial, Float, Stars } from '@react-three/drei'
-import { motion } from 'framer-motion'
-
-// Animated floating sphere with distortion - OPTIMIZED
-const AnimatedSphere = () => {
-  const meshRef = useRef()
-  
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = clock.getElapsedTime() * 0.15
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.2
-    }
-  })
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
-      <Sphere ref={meshRef} args={[1.5, 32, 32]} position={[0, 0, 0]}>
-        <MeshDistortMaterial
-          color="#6366f1"
-          attach="material"
-          distort={0.3}
-          speed={1.5}
-          roughness={0.3}
-          metalness={0.7}
-        />
-      </Sphere>
-    </Float>
-  )
-}
-
-// Floating particles - OPTIMIZED (reduced count)
-const Particles = ({ count = 80 }) => {
-  const points = useRef()
-  
-  const particlesPosition = useMemo(() => {
-    const positions = new Float32Array(count * 3)
-    for (let i = 0; i < count; i++) {
-      const theta = Math.random() * Math.PI * 2
-      const phi = Math.acos(2 * Math.random() - 1)
-      const r = 2.5 + Math.random() * 2
-      
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta)
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta)
-      positions[i * 3 + 2] = r * Math.cos(phi)
-    }
-    return positions
-  }, [count])
-
-  useFrame(({ clock }) => {
-    if (points.current) {
-      points.current.rotation.y = clock.getElapsedTime() * 0.03
-    }
-  })
-
-  return (
-    <points ref={points}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particlesPosition.length / 3}
-          array={particlesPosition}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.03}
-        color="#8b5cf6"
-        sizeAttenuation
-        transparent
-        opacity={0.8}
-      />
-    </points>
-  )
-}
-
-// Glowing ring - OPTIMIZED
-const GlowRing = () => {
-  const ringRef = useRef()
-  
-  useFrame(({ clock }) => {
-    if (ringRef.current) {
-      ringRef.current.rotation.x = Math.PI / 2
-      ringRef.current.rotation.z = clock.getElapsedTime() * 0.3
-    }
-  })
-
-  return (
-    <mesh ref={ringRef}>
-      <torusGeometry args={[2.2, 0.02, 8, 48]} />
-      <meshBasicMaterial color="#06b6d4" transparent opacity={0.6} />
-    </mesh>
-  )
-}
-
-// 3D Scene Component - OPTIMIZED with performance settings
-const Scene3D = ({ isVisible }) => {
-  return (
-    <Canvas
-      camera={{ position: [0, 0, 6], fov: 45 }}
-      className="absolute inset-0"
-      style={{ background: 'transparent' }}
-      dpr={[1, 1.5]}
-      frameloop={isVisible ? 'always' : 'never'}
-      performance={{ min: 0.5 }}
-      gl={{ antialias: false, powerPreference: 'high-performance' }}
-    >
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        
-        <AnimatedSphere />
-        <Particles />
-        <GlowRing />
-        <Stars radius={50} depth={50} count={300} factor={4} saturation={0} fade speed={0.5} />
-      </Suspense>
-    </Canvas>
-  )
-}
+import { useRef, useEffect, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const Hero = () => {
   const sectionRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(true)
+  const [time, setTime] = useState('')
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start']
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
 
-  // Track if hero section is visible to pause 3D animation when scrolled past
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    const updateTime = () => {
+      const now = new Date()
+      setTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        timeZone: 'Africa/Tunis'
+      }))
     }
-
-    return () => observer.disconnect()
+    updateTime()
+    const interval = setInterval(updateTime, 1000)
+    return () => clearInterval(interval)
   }, [])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
+  // Text animation variants
+  const lineVariants = {
+    hidden: { y: '100%' },
+    visible: (i) => ({
+      y: '0%',
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 1.5,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
+        duration: 1.2,
+        delay: 0.8 + i * 0.15,
         ease: [0.76, 0, 0.24, 1],
       },
-    },
+    }),
+  }
+
+  const fadeVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (delay) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        delay: delay,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    }),
   }
 
   return (
     <section
       id="home"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center overflow-hidden bg-black"
     >
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Scene3D isVisible={isVisible} />
-      </div>
+      {/* Subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#0d0d0d]" />
+      
+      {/* Grain overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
+        }}
+      />
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--color-dark)] z-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-dark)] via-transparent to-[var(--color-dark)] opacity-50 z-10" />
-
-      {/* Content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-20 text-center px-6 max-w-5xl mx-auto"
+      {/* Main Content */}
+      <motion.div 
+        style={{ y, opacity, scale }}
+        className="relative z-10 w-full container-custom"
       >
-        {/* Greeting */}
-        <motion.div variants={itemVariants} className="mb-4">
-          <span className="inline-block px-4 py-2 rounded-full glass text-sm font-mono text-[var(--color-accent)]">
-            👋 Welcome to my portfolio
-          </span>
-        </motion.div>
-
-        {/* Main heading */}
-        <motion.div variants={itemVariants} className="overflow-hidden">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 leading-tight">
-            <span className="block">I'm</span>
-            <span className="gradient-text">Hamza Ben Marouen</span>
-          </h1>
-        </motion.div>
-
-        {/* Subtitle */}
-        <motion.div variants={itemVariants} className="overflow-hidden mb-6">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-gray-300">
-            Full Stack Developer
-          </h2>
-        </motion.div>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 font-body"
-        >
-          Master's student in Computer Systems & Networks, specialized in full-stack web development.
-          Building modern web applications with MERN, and Flutter.
-        </motion.p>
-
-        {/* Tech stack badges */}
+        {/* Top Row */}
         <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-3 mb-10"
+          custom={0}
+          variants={fadeVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex justify-between items-start mb-16 md:mb-24"
         >
-          {['React', 'Node.js', 'Laravel', 'MongoDB', 'PostgreSQL', 'Flutter'].map((tech) => (
-            <span
-              key={tech}
-              className="px-4 py-2 rounded-full glass text-sm font-mono text-gray-300 hover:text-white transition-colors"
-            >
-              {tech}
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
+            <span className="text-[#888] text-xs tracking-[0.15em] uppercase">
+              Available for work
             </span>
-          ))}
+          </div>
+          <div className="text-right hidden md:block">
+            <p className="text-[#555] text-xs tracking-[0.15em] uppercase mb-1">Local Time</p>
+            <p className="text-white text-sm font-mono">{time}</p>
+          </div>
         </motion.div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <motion.a
-            href="#projects"
-            className="magnetic-btn"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View My Work
-          </motion.a>
-          <motion.a
-            href="#contact"
-            className="px-8 py-4 rounded-full border border-white/20 text-white font-semibold text-sm uppercase tracking-wider hover:bg-white/10 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get in Touch
-          </motion.a>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          variants={itemVariants}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-gray-500"
-          >
-            <span className="text-xs font-mono">Scroll Down</span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+        {/* Main Title */}
+        <div className="space-y-4">
+          {/* Line 1 */}
+          <div className="overflow-hidden">
+            <motion.h1
+              custom={0}
+              variants={lineVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </motion.div>
+              Hamza
+            </motion.h1>
+          </div>
+          
+          {/* Line 2 */}
+          <div className="overflow-hidden flex items-baseline gap-8">
+            <motion.h1
+              custom={1}
+              variants={lineVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Ben
+            </motion.h1>
+            <motion.span
+              custom={2}
+              variants={fadeVariants}
+              initial="hidden"
+              animate="visible"
+              className="hidden md:inline-block text-[#c9a227] text-lg md:text-xl italic"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              — Full Stack Developer
+            </motion.span>
+          </div>
+          
+          {/* Line 3 */}
+          <div className="overflow-hidden">
+            <motion.h1
+              custom={2}
+              variants={lineVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-[#888] leading-[0.9] tracking-[-0.03em]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Marouen
+            </motion.h1>
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <motion.div
+          custom={2.5}
+          variants={fadeVariants}
+          initial="hidden"
+          animate="visible"
+          className="mt-16 md:mt-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
+        >
+          <p className="max-w-md text-[#888] text-base leading-relaxed">
+            Building thoughtful digital experiences with clean code 
+            and modern technologies. Based in Tunisia.
+          </p>
+          
+          <a
+            href="#projects"
+            className="group flex items-center gap-4"
+          >
+            <span className="text-[#888] text-xs tracking-[0.15em] uppercase group-hover:text-[#c9a227] transition-colors duration-500">
+              View Work
+            </span>
+            <div className="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] group-hover:bg-[#c9a227]/10 transition-all duration-500">
+              <svg 
+                className="w-4 h-4 text-[#888] group-hover:text-[#c9a227] rotate-90 transition-all duration-500" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </a>
         </motion.div>
       </motion.div>
 
-      {/* Side decorations */}
-      <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-4">
-        <motion.a
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-px h-16 bg-gradient-to-b from-[#c9a227] to-transparent" />
+        </motion.div>
+      </motion.div>
+
+      {/* Side Elements */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6"
+      >
+        <a
           href="https://github.com/hamzabenmarwen"
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2 }}
-          className="text-gray-500 hover:text-white transition-colors text-sm font-mono"
+          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em] uppercase"
           style={{ writingMode: 'vertical-rl' }}
         >
-          GitHub
-        </motion.a>
-        <motion.a
+          Github
+        </a>
+        <div className="w-px h-8 bg-[#333]" />
+        <a
           href="https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/"
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2.1 }}
-          className="text-gray-500 hover:text-white transition-colors text-sm font-mono"
+          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em] uppercase"
           style={{ writingMode: 'vertical-rl' }}
         >
           LinkedIn
-        </motion.a>
-      </div>
+        </a>
+      </motion.div>
 
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
-        <motion.a
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block"
+      >
+        <a
           href="mailto:hamzabenmarwen@gmail.com"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2 }}
-          className="text-gray-500 hover:text-white transition-colors text-sm font-mono"
+          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em]"
           style={{ writingMode: 'vertical-rl' }}
         >
           hamzabenmarwen@gmail.com
-        </motion.a>
-      </div>
+        </a>
+      </motion.div>
     </section>
   )
 }
 
 export default Hero
+
+

@@ -1,29 +1,22 @@
 import { useRef, useState } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
-// Initialize EmailJS
 emailjs.init('0Zu8VS_SoNrtGcsFQ')
 
 const Contact = () => {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
-  
-  // Parallax for decorative elements
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  })
-  const decorY = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const formRef = useRef(null)
   
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    subject: '',
     message: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [focusedField, setFocusedField] = useState(null)
 
   const handleChange = (e) => {
     setFormState({
@@ -44,322 +37,241 @@ const Contact = () => {
           to_email: 'hamzabenmarwen@gmail.com',
           from_name: formState.name,
           from_email: formState.email,
-          subject: formState.subject,
+          subject: `Portfolio Contact from ${formState.name}`,
           message: formState.message,
         }
       )
 
       if (response.status === 200) {
         setIsSubmitted(true)
-        setFormState({ name: '', email: '', subject: '', message: '' })
+        setFormState({ name: '', email: '', message: '' })
         setTimeout(() => setIsSubmitted(false), 5000)
-      } else {
-        alert('Failed to send message. Please try again.')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Error sending message. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const contactInfo = [
-    {
-      icon: '📧',
-      label: 'Email',
-      value: 'hamzabenmarwen@gmail.com',
-      link: 'mailto:hamzabenmarwen@gmail.com',
-    },
-    {
-      icon: '📱',
-      label: 'Phone',
-      value: '+216 53 180 702',
-      link: 'tel:+21653180702',
-    },
-    {
-      icon: '📍',
-      label: 'Location',
-      value: 'Zaghouan, Tunisia',
-      link: '#',
-    },
-    {
-      icon: '💼',
-      label: 'LinkedIn',
-      value: 'hamza-ben-marouen',
-      link: 'https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/',
-    },
-    {
-      icon: '🐙',
-      label: 'GitHub',
-      value: '@hamzabenmarwen',
-      link: 'https://github.com/hamzabenmarwen',
-    },
-  ]
+  const lineVariants = {
+    hidden: { y: '100%' },
+    visible: (i) => ({
+      y: '0%',
+      transition: {
+        duration: 1,
+        delay: i * 0.1,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    }),
+  }
 
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="section relative py-32 overflow-hidden"
+      className="relative py-32 md:py-48 bg-black overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-[var(--color-darker)]" />
-      <div className="absolute right-0 bottom-0 w-[600px] h-[600px] bg-[var(--color-secondary)] rounded-full blur-[200px] opacity-10" />
-      <div className="absolute left-0 top-0 w-[400px] h-[400px] bg-[var(--color-primary)] rounded-full blur-[200px] opacity-10" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Section header */}
+      <div className="container-custom">
+        {/* Section Label */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1 }}
+          className="flex items-center gap-6 mb-20"
         >
-          <span className="text-[var(--color-primary)] font-mono text-sm tracking-wider">
-            05. GET IN TOUCH
-          </span>
-          <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">
-            Let's Work <span className="gradient-text">Together</span>
-          </h2>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Have a project in mind or just want to say hi? I'd love to hear from
-            you. Let's create something amazing together!
-          </p>
+          <span className="text-[#c9a227] text-xs tracking-[0.2em] uppercase font-mono">05</span>
+          <span className="text-[#555] text-xs tracking-[0.2em] uppercase">Contact</span>
+          <div className="flex-1 h-px bg-[#222]" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact form */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-400 mb-2"
-                  >
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-400 mb-2"
-                  >
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
+        {/* Big Title */}
+        <div className="mb-20">
+          <div className="overflow-hidden">
+            <motion.h2
+              custom={0}
+              variants={lineVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.9] tracking-[-0.03em]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Let's work
+            </motion.h2>
+          </div>
+          <div className="overflow-hidden">
+            <motion.h2
+              custom={1}
+              variants={lineVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="text-5xl md:text-7xl lg:text-8xl font-light text-[#c9a227] leading-[0.9] tracking-[-0.03em] italic"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              together
+            </motion.h2>
+          </div>
+        </div>
 
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-400 mb-2"
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="space-y-10"
+          >
+            {/* Email */}
+            <div className="group">
+              <p className="text-[#555] text-[10px] tracking-[0.2em] uppercase mb-3">Email</p>
+              <a
+                href="mailto:hamzabenmarwen@gmail.com"
+                className="text-xl md:text-2xl text-white font-light hover:text-[#c9a227] transition-colors duration-500"
+              >
+                hamzabenmarwen@gmail.com
+              </a>
+            </div>
+
+            {/* Phone */}
+            <div className="group">
+              <p className="text-[#555] text-[10px] tracking-[0.2em] uppercase mb-3">Phone</p>
+              <a
+                href="tel:+21653180702"
+                className="text-xl md:text-2xl text-white font-light hover:text-[#c9a227] transition-colors duration-500"
+              >
+                +216 53 180 702
+              </a>
+            </div>
+
+            {/* Location */}
+            <div>
+              <p className="text-[#555] text-[10px] tracking-[0.2em] uppercase mb-3">Location</p>
+              <p className="text-xl md:text-2xl text-white font-light">Zaghouan, Tunisia</p>
+            </div>
+
+            {/* Socials */}
+            <div className="pt-8 border-t border-[#222]">
+              <p className="text-[#555] text-[10px] tracking-[0.2em] uppercase mb-4">Follow</p>
+              <div className="flex gap-6">
+                <a
+                  href="https://github.com/hamzabenmarwen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#888] hover:text-[#c9a227] text-sm tracking-wider uppercase transition-colors duration-300"
                 >
-                  Subject
+                  Github
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#888] hover:text-[#c9a227] text-sm tracking-wider uppercase transition-colors duration-300"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+
+            {/* Availability */}
+            <div className="inline-flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
+              <span className="text-[#888] text-sm">Available for new projects</span>
+            </div>
+          </motion.div>
+
+          {/* Right - Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+              {/* Name */}
+              <div className="relative">
+                <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${
+                  focusedField === 'name' || formState.name
+                    ? 'text-[10px] text-[#c9a227] -top-5 tracking-[0.2em] uppercase'
+                    : 'text-[#555] top-4'
+                }`}>
+                  Your Name
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  value={formState.subject}
+                  name="name"
+                  value={formState.name}
                   onChange={handleChange}
+                  onFocus={() => setFocusedField('name')}
+                  onBlur={() => setFocusedField(null)}
                   required
-                  className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 transition-all"
-                  placeholder="Project Inquiry"
+                  className="w-full bg-transparent border-b border-[#222] py-4 text-white focus:border-[#c9a227] focus:outline-none transition-colors duration-300"
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Message
+              {/* Email */}
+              <div className="relative">
+                <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${
+                  focusedField === 'email' || formState.email
+                    ? 'text-[10px] text-[#c9a227] -top-5 tracking-[0.2em] uppercase'
+                    : 'text-[#555] top-4'
+                }`}>
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                  onFocus={() => setFocusedField('email')}
+                  onBlur={() => setFocusedField(null)}
+                  required
+                  className="w-full bg-transparent border-b border-[#222] py-4 text-white focus:border-[#c9a227] focus:outline-none transition-colors duration-300"
+                />
+              </div>
+
+              {/* Message */}
+              <div className="relative">
+                <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${
+                  focusedField === 'message' || formState.message
+                    ? 'text-[10px] text-[#c9a227] -top-5 tracking-[0.2em] uppercase'
+                    : 'text-[#555] top-4'
+                }`}>
+                  Your Message
                 </label>
                 <textarea
-                  id="message"
                   name="message"
                   value={formState.message}
                   onChange={handleChange}
+                  onFocus={() => setFocusedField('message')}
+                  onBlur={() => setFocusedField(null)}
                   required
-                  rows={6}
-                  className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 transition-all resize-none"
-                  placeholder="Tell me about your project..."
+                  rows={4}
+                  className="w-full bg-transparent border-b border-[#222] py-4 text-white focus:border-[#c9a227] focus:outline-none transition-colors duration-300 resize-none"
                 />
               </div>
 
-              <motion.button
+              {/* Submit */}
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full magnetic-btn disabled:opacity-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="group mt-8 flex items-center gap-4"
               >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg
-                      className="animate-spin h-5 w-5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                      />
-                    </svg>
-                    Sending...
-                  </span>
-                ) : isSubmitted ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                    Message Sent!
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    Send Message
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                    </svg>
-                  </span>
-                )}
-              </motion.button>
-            </form>
-          </motion.div>
-
-          {/* Contact info */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-display font-bold text-white mb-6">
-                Contact Information
-              </h3>
-              <p className="text-gray-400 mb-8">
-                Feel free to reach out through any of these channels. I typically
-                respond within 24 hours.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.label}
-                  href={info.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                  className="flex items-center gap-4 p-4 rounded-xl glass hover:bg-white/10 transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                    {info.icon}
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">{info.label}</p>
-                    <p className="text-white font-medium group-hover:gradient-text transition-all">
-                      {info.value}
-                    </p>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Availability badge */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.8 }}
-              className="p-6 rounded-2xl gradient-border"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-green-400 font-medium">
-                  Available for freelance work
+                <span className="text-[#888] text-xs tracking-[0.15em] uppercase group-hover:text-[#c9a227] transition-colors duration-500">
+                  {isSubmitting ? 'Sending...' : isSubmitted ? 'Sent!' : 'Send Message'}
                 </span>
-              </div>
-              <p className="text-gray-400 text-sm">
-                I'm currently taking on new projects. Let's discuss how I can help
-                bring your vision to life.
-              </p>
-            </motion.div>
-
-            {/* Social links */}
-            <div>
-              <p className="text-gray-400 text-sm mb-4">Or connect with me on</p>
-              <div className="flex gap-4">
-                {[
-                  { name: 'GitHub', icon: '🐙' },
-                  { name: 'LinkedIn', icon: '💼' },
-                  { name: 'Twitter', icon: '🐦' },
-                  { name: 'Instagram', icon: '📸' },
-                ].map((social) => (
-                  <motion.a
-                    key={social.name}
-                    href="#"
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 rounded-xl glass flex items-center justify-center text-xl hover:bg-white/10 transition-colors"
-                    title={social.name}
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+                <div className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] transition-colors duration-500">
+                  {isSubmitted ? (
+                    <svg className="w-4 h-4 text-[#c9a227]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-[#888] group-hover:text-[#c9a227] transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  )}
+                </div>
+              </button>
+            </form>
           </motion.div>
         </div>
       </div>
@@ -368,3 +280,4 @@ const Contact = () => {
 }
 
 export default Contact
+

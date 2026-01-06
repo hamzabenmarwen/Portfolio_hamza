@@ -5,195 +5,239 @@ const About = () => {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
   
-  // Parallax effect
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start']
   })
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50])
+  const imageY = useTransform(scrollYProgress, [0, 1], [100, -100])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
+  const lineVariants = {
+    hidden: { y: '100%' },
+    visible: (i) => ({
+      y: '0%',
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
+        duration: 1,
+        delay: i * 0.1,
         ease: [0.76, 0, 0.24, 1],
       },
-    },
+    }),
   }
 
-  const stats = [
-    { number: '3+', label: 'Internships Completed' },
-    { number: '10+', label: 'Projects Built' },
-    { number: '5+', label: 'Technologies Mastered' },
-    { number: '2024', label: 'Graduation Year' },
-  ]
+  const fadeVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (delay) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        delay: delay,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    }),
+  }
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className="section relative py-32 overflow-hidden"
+      className="relative py-32 md:py-48 bg-black overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-dark)] via-[var(--color-darker)] to-[var(--color-dark)]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Section header */}
+      <div className="container-custom">
+        {/* Section Label */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1 }}
+          className="flex items-center gap-6 mb-20"
         >
-          <span className="text-[var(--color-primary)] font-mono text-sm tracking-wider">
-            01. ABOUT ME
-          </span>
-          <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">
-            Turning ideas into
-            <span className="gradient-text block">digital reality</span>
-          </h2>
+          <span className="text-[#c9a227] text-xs tracking-[0.2em] uppercase font-mono">01</span>
+          <span className="text-[#555] text-xs tracking-[0.2em] uppercase">About</span>
+          <div className="flex-1 h-px bg-[#222]" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image side with parallax */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ y: imageY }}
-            className="relative"
-          >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden gradient-border">
-              {/* Profile image */}
-              <img 
-                src={`${import.meta.env.BASE_URL}hamza.png`} 
-                alt="Hamza Ben Marouen"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)] via-transparent to-transparent opacity-60" />
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left - Text */}
+          <div>
+            {/* Big Headline */}
+            <div className="mb-12">
+              <div className="overflow-hidden">
+                <motion.h2
+                  custom={0}
+                  variants={lineVariants}
+                  initial="hidden"
+                  animate={isInView ? 'visible' : 'hidden'}
+                  className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1] tracking-[-0.02em]"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  A developer with
+                </motion.h2>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  custom={1}
+                  variants={lineVariants}
+                  initial="hidden"
+                  animate={isInView ? 'visible' : 'hidden'}
+                  className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1] tracking-[-0.02em]"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  a passion for
+                </motion.h2>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  custom={2}
+                  variants={lineVariants}
+                  initial="hidden"
+                  animate={isInView ? 'visible' : 'hidden'}
+                  className="text-4xl md:text-5xl lg:text-6xl font-light text-[#c9a227] leading-[1.1] tracking-[-0.02em] italic"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  digital craft
+                </motion.h2>
+              </div>
             </div>
 
-            {/* Floating elements - simplified */}
-            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-xl glass flex items-center justify-center floating">
-              <span className="text-4xl">⚛️</span>
-            </div>
-            <div className="absolute -bottom-8 -left-8 w-20 h-20 rounded-xl glass flex items-center justify-center floating" style={{ animationDelay: '1s' }}>
-              <span className="text-3xl">🚀</span>
-            </div>
-          </motion.div>
-
-          {/* Content side */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            <motion.p
-              variants={itemVariants}
-              className="text-xl text-gray-300 leading-relaxed mb-6"
+            {/* Description */}
+            <motion.div
+              custom={0.4}
+              variants={fadeVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="space-y-6 mb-12"
             >
-              Hello! I'm Hamza, a Full Stack Developer based in{' '}
-              <span className="text-white font-semibold">Zaghouan, Tunisia</span>. Currently
-              pursuing my Master's in Development of Computer Systems and Networks (DSIR) at ISET Sfax.
-            </motion.p>
+              <p className="text-[#888] text-lg leading-relaxed">
+                I'm Hamza Ben Marouen, a Full Stack Developer based in Zaghouan, Tunisia.
+                Currently pursuing my Master's in Development of Computer Systems and Networks.
+              </p>
+              <p className="text-[#555] leading-relaxed">
+                Through internships at IT GATE, Ciments Jbel Oust, and the National Statistics 
+                Institute, I've built real-world applications using modern technologies. I believe 
+                in clean code, thoughtful design, and creating solutions that matter.
+              </p>
+            </motion.div>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-gray-400 leading-relaxed mb-6"
+            {/* Stats */}
+            <motion.div
+              custom={0.6}
+              variants={fadeVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="grid grid-cols-3 gap-8 py-8 border-t border-b border-[#222]"
             >
-              I specialize in building modern web applications using the MERN stack,
-              Laravel, and Flutter. Through my internships at IT GATE, Ciments Jbel Oust,
-              and INS, I've gained hands-on experience in developing real-world solutions.
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-gray-400 leading-relaxed mb-8"
-            >
-              I'm passionate about creating clean, efficient code and building
-              applications that make a difference. Always eager to learn new
-              technologies and take on challenging projects.
-            </motion.p>
-
-            {/* Key highlights */}
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-xl font-semibold text-white mb-4">
-                What I bring to the table:
-              </h3>
-              <ul className="grid grid-cols-2 gap-3">
-                {[
-                  'MERN Stack Development',
-                  'Laravel & PHP',
-                  'Flutter Mobile Apps',
-                  'Database Design',
-                  'REST API Development',
-                  'Team Collaboration',
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-2 text-gray-400">
-                    <span className="text-[var(--color-primary)]">▹</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              {[
+                { number: '3+', label: 'Years Learning' },
+                { number: '10+', label: 'Projects Built' },
+                { number: '3', label: 'Internships' },
+              ].map((stat, index) => (
+                <div key={index}>
+                  <div 
+                    className="text-3xl md:text-4xl text-white mb-2 tracking-[-0.02em]"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className="text-[#555] text-[10px] tracking-[0.15em] uppercase">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </motion.div>
 
             {/* CTA */}
-            <motion.div variants={itemVariants}>
+            <motion.div
+              custom={0.8}
+              variants={fadeVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="mt-12"
+            >
               <a
-                href="/resume.pdf"
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 magnetic-btn"
+                className="group inline-flex items-center gap-4"
               >
-                <span>Download Resume</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
-                </svg>
+                <span className="text-[#888] text-xs tracking-[0.15em] uppercase group-hover:text-[#c9a227] transition-colors duration-500">
+                  Download Resume
+                </span>
+                <div className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] transition-colors duration-500">
+                  <svg className="w-4 h-4 text-[#888] group-hover:text-[#c9a227] transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </div>
               </a>
+            </motion.div>
+          </div>
+
+          {/* Right - Image */}
+          <motion.div
+            style={{ y: imageY }}
+            className="relative lg:mt-24"
+          >
+            <motion.div
+              initial={{ clipPath: 'inset(100% 0 0 0)' }}
+              animate={isInView ? { clipPath: 'inset(0% 0 0 0)' } : {}}
+              transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+              className="relative aspect-[3/4] overflow-hidden"
+            >
+              <img 
+                src={`${import.meta.env.BASE_URL}hamza.png`} 
+                alt="Hamza Ben Marouen"
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Floating label */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="absolute -bottom-8 -left-8 md:left-auto md:-right-8 bg-black p-6"
+            >
+              <p className="text-[#c9a227] text-xs tracking-[0.2em] uppercase mb-2">Location</p>
+              <p className="text-white text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Zaghouan, Tunisia
+              </p>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Stats */}
+        {/* Services Section */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24"
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-32"
         >
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="text-center p-6 rounded-2xl glass hover:scale-105 transition-transform"
-            >
-              <div className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">
-                {stat.number}
+          <p className="text-[#555] text-xs tracking-[0.2em] uppercase mb-12">What I Do</p>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#222]">
+            {[
+              { title: 'Web Development', desc: 'Full-stack applications with React, Node.js & Laravel' },
+              { title: 'Mobile Apps', desc: 'Cross-platform development with Flutter' },
+              { title: 'Database Design', desc: 'Scalable architecture with MongoDB & PostgreSQL' },
+              { title: 'API Development', desc: 'RESTful APIs and system integration' },
+            ].map((service, index) => (
+              <div 
+                key={index}
+                className="group bg-black p-8 hover:bg-[#0d0d0d] transition-colors duration-500"
+              >
+                <span className="text-[#c9a227] text-xs font-mono mb-4 block">
+                  0{index + 1}
+                </span>
+                <h3 className="text-white text-xl mb-3 group-hover:text-[#c9a227] transition-colors duration-500">
+                  {service.title}
+                </h3>
+                <p className="text-[#555] text-sm leading-relaxed">
+                  {service.desc}
+                </p>
               </div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
@@ -201,3 +245,4 @@ const About = () => {
 }
 
 export default About
+
