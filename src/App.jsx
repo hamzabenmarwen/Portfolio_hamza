@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 // Components
 import CustomCursor from './components/CustomCursor'
+import AudioPlayer from './components/AudioPlayer'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -20,6 +21,7 @@ function App() {
     <div ref={appRef}>
       <Loader onComplete={() => setIsLoading(false)} />
       <CustomCursor />
+      <AudioPlayer />
       <Navbar />
       <main>
         <Hero />

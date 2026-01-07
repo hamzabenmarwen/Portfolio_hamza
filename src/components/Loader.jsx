@@ -37,7 +37,6 @@ const Loader = ({ onComplete }) => {
           }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[100] bg-black flex flex-col justify-between"
-          style={{ clipPath: 'inset(0 0 0 0)' }}
         >
           {/* Top */}
           <div className="p-8 md:p-12 flex justify-between items-start">
