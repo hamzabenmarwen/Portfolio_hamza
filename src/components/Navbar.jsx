@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
+  // Desktop navbar links - page navigation
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Work', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/', isRoute: true },
+    { name: 'Work', href: '/work', isRoute: true },
+    { name: 'About', href: '/about', isRoute: true },
+    { name: 'Contact', href: '#contact', isRoute: false },
   ]
 
   useEffect(() => {
@@ -19,10 +24,26 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false)
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
   const scrollToSection = (href) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        const element = document.querySelector(href)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 1800)
+    } else {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
     setIsMenuOpen(false)
   }
@@ -39,32 +60,42 @@ const Navbar = () => {
       >
         <div className="container-custom py-6 flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault()
-              scrollToSection('#home')
-            }}
+          <Link
+            to="/"
             className="text-lg font-light text-white tracking-[-0.02em]"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Hamza<span className="text-[#c9a227]">.</span>
-          </a>
+          </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Page links */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection(link.href)
-                }}
-                className="text-[11px] uppercase tracking-[0.15em] text-[#888] hover:text-white transition-colors duration-300"
-              >
-                {link.name}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 ${
+                    location.pathname === link.href
+                      ? 'text-[#c9a227]'
+                      : 'text-[#888] hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToSection(link.href)
+                  }}
+                  className="text-[11px] uppercase tracking-[0.15em] text-[#888] hover:text-white transition-colors duration-300"
+                >
+                  {link.name}
+                </a>
+              )
             ))}
           </div>
 

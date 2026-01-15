@@ -18,8 +18,8 @@ const Loader = ({ onComplete }) => {
 
     const exitTimer = setTimeout(() => {
       setIsExiting(true)
-      setTimeout(onComplete, 1000)
-    }, 1800)
+      setTimeout(onComplete, 600)
+    }, 1400)
 
     return () => {
       clearInterval(interval)
