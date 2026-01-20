@@ -73,7 +73,7 @@ const AudioPlayer = () => {
         onEnded={handleEnded}
         muted
       >
-        <source src="/Portfolio_hamza/Passionfruit.mp3" type="audio/mpeg" />
+        <source src="/Portfolio_hamza/Pufino - Feeling Good.mp3" type="audio/mpeg" />
       </audio>
 
       <motion.button

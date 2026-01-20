@@ -154,7 +154,7 @@ const About = () => {
               className="mt-12"
             >
               <a
-                href={`${import.meta.env.BASE_URL}resume.pdf`}
+                href={`${import.meta.env.BASE_URL}hamza_ben_Marouen_cv.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-4"

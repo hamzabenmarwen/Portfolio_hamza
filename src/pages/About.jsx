@@ -125,8 +125,9 @@ const AboutPage = () => {
             {/* CTA */}
             <div className="mt-12">
               <a
-                href="/Portfolio_hamza/cv.pdf"
+                href={`${import.meta.env.BASE_URL}hamza_ben_Marouen_cv.pdf`}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-4 px-8 py-4 border border-[#c9a227] text-[#c9a227] rounded-full hover:bg-[#c9a227] hover:text-black transition-all duration-500"
               >
                 <span>Download CV</span>
