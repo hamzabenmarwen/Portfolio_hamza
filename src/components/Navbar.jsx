@@ -168,7 +168,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex gap-6 text-sm">
                   <a href="https://github.com/hamzabenmarwen" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-[#c9a227] transition-colors">Github</a>
-                  <a href="https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-[#c9a227] transition-colors">LinkedIn</a>
+                  <a href="https://linkedin.com/in/hamzabenmarwen" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-[#c9a227] transition-colors">LinkedIn</a>
                 </div>
               </div>
             </motion.div>

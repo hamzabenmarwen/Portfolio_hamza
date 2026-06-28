@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Projects = () => {
   const sectionRef = useRef(null)
@@ -9,40 +10,44 @@ const Projects = () => {
 
   const projects = [
     {
-      id: 1,
+      id: 'assiette-gourmande',
+      title: 'Assiette Gourmande',
+      category: 'Smart Catering Platform (Master PFE)',
+      tags: ['React', 'FastAPI', 'Node.js', 'AI RAG'],
+      year: '2026',
+      image: '/Portfolio_hamza/project1.jpg',
+    },
+    {
+      id: 'mon-cabinet',
       title: 'Mon Cabinet',
-      category: 'Web Application',
-      description: 'A comprehensive platform for managing medical offices with patient scheduling and role-based access.',
-      tags: ['React', 'Node.js', 'MongoDB'],
+      category: 'Medical Management App (Licence PFE)',
+      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
       year: '2024',
-      image: '/project1.jpg',
+      image: '/Portfolio_hamza/project1.jpg',
     },
     {
-      id: 2,
-      title: 'HR Platform',
-      category: 'Enterprise System',
-      description: 'Complete HR solution with employee management, authentication, and CRUD operations.',
-      tags: ['Laravel', 'PHP', 'MySQL'],
-      year: '2023',
-      image: '/project2.jpg',
-    },
-    {
-      id: 3,
+      id: 'service-apv',
       title: 'Service APV',
-      category: 'Management System',
-      description: 'End-to-end service management with real-time tracking and reporting dashboard.',
-      tags: ['.NET', 'React', 'SQL Server'],
-      year: '2024',
-      image: '/project3.jpg',
+      category: 'After-Sales Service Microservices',
+      tags: ['.NET Core', 'React', 'Docker', 'SQL Server'],
+      year: '2025',
+      image: '/Portfolio_hamza/project3.jpg',
     },
     {
-      id: 4,
-      title: 'Portfolio',
-      category: 'Personal Website',
-      description: 'Modern portfolio with smooth animations and immersive user experience.',
-      tags: ['React', 'Framer Motion', 'Tailwind'],
-      year: '2024',
-      image: '/project4.jpg',
+      id: 'gestion-ventes',
+      title: 'Gestion des Ventes',
+      category: 'Sales Management Microservices',
+      tags: ['Spring Boot', 'Angular', 'Docker', 'PostgreSQL'],
+      year: '2025',
+      image: '/Portfolio_hamza/project2.jpg',
+    },
+    {
+      id: 'portfolio',
+      title: '3D Portfolio',
+      category: 'Interactive 3D Portfolio',
+      tags: ['React', 'Three.js', 'Framer Motion', 'Tailwind'],
+      year: '2025',
+      image: '/Portfolio_hamza/project4.jpg',
     },
   ]
 
@@ -98,8 +103,8 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <a
-                href="#"
+              <Link
+                to={`/work/${project.id}`}
                 className="block py-8 md:py-12 border-t border-[#222] group-hover:border-[#333] transition-colors duration-500"
               >
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -125,7 +130,7 @@ const Projects = () => {
                       {project.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] text-[#555] tracking-[0.1em] uppercase"
+                          className="text-[10px] text-[#555] tracking-[0.15em] uppercase"
                         >
                           {tag}
                         </span>
@@ -146,7 +151,7 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
 
               {/* Hover Preview */}
               <motion.div

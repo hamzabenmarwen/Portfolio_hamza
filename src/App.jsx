@@ -26,10 +26,14 @@ const getPageName = (pathname) => {
   if (pathname.startsWith('/work/')) {
     const id = pathname.split('/work/')[1]
     const names = {
+      'assiette-gourmande': 'Assiette Gourmande',
       'mon-cabinet': 'Mon Cabinet',
-      'hr-platform': 'HR Platform',
       'service-apv': 'Service APV',
-      'portfolio': 'Portfolio',
+      'gestion-ventes': 'Gestion des Ventes',
+      'portfolio': '3D Portfolio',
+      'quiz-mobile': 'Quiz Mobile',
+      'gestion-bibliotheque': 'Bibliothèque',
+      'hr-platform': 'HR Platform',
     }
     return names[id] || 'Project'
   }

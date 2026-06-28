@@ -108,13 +108,13 @@ const About = () => {
               className="space-y-6 mb-12"
             >
               <p className="text-[#888] text-lg leading-relaxed">
-                I'm Hamza Ben Marouen, a Full Stack Developer based in Zaghouan, Tunisia.
+                I'm Hamza Ben Marouen, a Full Stack & AI Developer based in Zaghouan, Tunisia.
                 Currently pursuing my Master's in Development of Computer Systems and Networks.
               </p>
               <p className="text-[#555] leading-relaxed">
-                Through internships at IT GATE, Ciments Jbel Oust, and the National Statistics 
-                Institute, I've built real-world applications using modern technologies. I believe 
-                in clean code, thoughtful design, and creating solutions that matter.
+                Through internships at Assiette Gourmande Sfaxienne (Master PFE), IT GATE (Licence PFE), 
+                and Ciments Jbel Oust, I've built real-world applications and integrated advanced 
+                AI capabilities. I believe in clean code, thoughtful design, and creating solutions that matter.
               </p>
             </motion.div>
 
@@ -127,7 +127,7 @@ const About = () => {
               className="grid grid-cols-3 gap-8 py-8 border-t border-b border-[#222]"
             >
               {[
-                { number: '3+', label: 'Years Learning' },
+                { number: '4+', label: 'Years Learning' },
                 { number: '10+', label: 'Projects Built' },
                 { number: '3', label: 'Internships' },
               ].map((stat, index) => (
@@ -217,10 +217,10 @@ const About = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#222]">
             {[
-              { title: 'Web Development', desc: 'Full-stack applications with React, Node.js & Laravel' },
-              { title: 'Mobile Apps', desc: 'Cross-platform development with Flutter' },
-              { title: 'Database Design', desc: 'Scalable architecture with MongoDB & PostgreSQL' },
-              { title: 'API Development', desc: 'RESTful APIs and system integration' },
+              { title: 'Web Development', desc: 'Full-stack applications with React, Node.js, Spring Boot & Laravel' },
+              { title: 'Mobile Apps', desc: 'Cross-platform development with Flutter & biometrics' },
+              { title: 'Database Design', desc: 'Scalable databases with PostgreSQL, MongoDB & MySQL' },
+              { title: 'AI Integration', desc: 'Advanced AI features (RAG chatbot, forecasting, OCR)' },
             ].map((service, index) => (
               <div 
                 key={index}

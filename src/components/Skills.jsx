@@ -12,19 +12,30 @@ const Skills = () => {
   const marqueeX = useTransform(scrollYProgress, [0, 1], ['0%', '-20%'])
 
   const skills = {
-    frontend: ['React', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'Flutter', 'Next.js'],
-    backend: ['Node.js', 'Laravel', 'Express.js', 'PHP', '.NET', 'Symfony'],
-    database: ['MongoDB', 'PostgreSQL', 'MySQL', 'Oracle', 'Firebase'],
-    tools: ['Git', 'GitHub', 'VS Code', 'Figma', 'Docker', 'Postman'],
+    languages: ['JavaScript', 'TypeScript', 'Python', 'Java', 'PHP', 'SQL', 'HTML/CSS'],
+    frontend: ['React', 'Angular', 'Flutter', 'Three.js', 'Tailwind CSS', 'Material UI'],
+    backend: ['Node.js/Express', 'FastAPI', 'Spring Boot', 'Laravel', 'Symfony'],
+    aiData: ['LangChain', 'FAISS', 'Gemini API', 'Prophet', 'scikit-learn'],
+    databases: ['PostgreSQL', 'MongoDB', 'MySQL', 'Oracle DB', 'Prisma ORM'],
+    tools: ['Git', 'Docker', 'GitHub', 'Postman', 'Socket.IO', 'Figma', 'Linux'],
+  }
+
+  const categoryNames = {
+    languages: 'Languages',
+    frontend: 'Frontend',
+    backend: 'Backend',
+    aiData: 'AI & Data',
+    databases: 'Databases',
+    tools: 'Tools',
   }
 
   const techStack = [
-    { name: 'React', level: 90 },
-    { name: 'Node.js', level: 85 },
-    { name: 'Laravel', level: 85 },
-    { name: 'MongoDB', level: 80 },
-    { name: 'Flutter', level: 70 },
-    { name: 'PostgreSQL', level: 75 },
+    { name: 'React / Frontend', level: 90 },
+    { name: 'Node.js / Express', level: 85 },
+    { name: 'FastAPI / Python / AI RAG', level: 80 },
+    { name: 'Laravel / Spring Boot', level: 80 },
+    { name: 'PostgreSQL / MongoDB / Prisma', level: 85 },
+    { name: 'Docker / DevOps / Git', level: 75 },
   ]
 
   return (
@@ -81,7 +92,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mt-20">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-12 mt-20">
           {Object.entries(skills).map(([category, items], categoryIndex) => (
             <motion.div
               key={category}
@@ -90,7 +101,7 @@ const Skills = () => {
               transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
             >
               <h3 className="text-[#c9a227] text-[10px] tracking-[0.2em] uppercase mb-6 font-mono">
-                {category}
+                {categoryNames[category] || category}
               </h3>
               <ul className="space-y-3">
                 {items.map((skill) => (

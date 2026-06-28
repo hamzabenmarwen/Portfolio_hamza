@@ -5,20 +5,49 @@ const ProjectDetail = () => {
   const { id } = useParams()
 
   const projects = {
+    'assiette-gourmande': {
+      title: 'Assiette Gourmande',
+      category: 'Smart Catering Platform (Master PFE)',
+      year: '2026',
+      client: 'Assiette Gourmande Sfaxienne',
+      role: 'Full-Stack & AI Developer',
+      duration: '5 months',
+      description: 'An intelligent microservices platform featuring a RAG chatbot, Prophet demand forecasting, meal recommendation, kitchen OCR, and kitchen optimization.',
+      longDescription: `Assiette Gourmande is a smart catering platform that brings cutting-edge artificial intelligence to restaurant and Traiteur management. The system is split into 6 decoupled microservices built using Node.js/Express and FastAPI, coordinating across 4 PostgreSQL databases.
+
+Key features include:
+• Intelligent AI Chatbot: Built using a RAG architecture with LangChain, FAISS vector store, and Gemini API to assist customers with orders and menus.
+• Demand Forecasting: Implemented using Facebook Prophet to predict order quantities and raw material needs.
+• Meal Recommendation: Personalized dish suggestions based on historical user choices.
+• Kitchen OCR: Scans and processes invoice/receipt data automatically.
+• Kitchen Optimization: Custom algorithms to schedule and optimize chef workloads.
+• Socket.IO integration: Enables real-time coordination between frontend and backend services.
+• Payment Portal: Integrates Tunisia's local payment gateway Flouci.`,
+      technologies: ['React', 'Node.js', 'FastAPI', 'PostgreSQL', 'LangChain', 'FAISS', 'Gemini API', 'Prophet', 'Socket.io', 'Flouci'],
+      images: [
+        '/Portfolio_hamza/project1.jpg',
+        '/Portfolio_hamza/project1-2.jpg',
+        '/Portfolio_hamza/project1-3.jpg',
+      ],
+      video: null,
+      liveUrl: null,
+      githubUrl: 'https://github.com/hamzabenmarwen',
+      color: '#c9a227',
+    },
     'mon-cabinet': {
       title: 'Mon Cabinet',
-      category: 'Web Application',
+      category: 'Medical Management App (Licence PFE)',
       year: '2024',
       client: 'IT GATE',
       role: 'Full Stack Developer',
       duration: '4 months',
-      description: 'A comprehensive platform for managing medical offices with patient scheduling, role-based access, and real-time notifications. This project was built during my end-of-studies internship at IT GATE.',
+      description: 'A comprehensive MERN stack platform for managing medical practices, featuring role-based access control, patient history management, appointment scheduling, and real-time notifications.',
       longDescription: `Mon Cabinet is a full-featured medical office management system designed to streamline healthcare administration. The platform enables medical professionals to efficiently manage their practice, from patient appointments to medical records.
 
 Key features include:
 • Patient management with complete medical history
 • Appointment scheduling with calendar integration
-• Role-based access control for doctors, nurses, and administrators
+• Role-based access control (RBAC) for doctors, nurses, and administrators
 • Real-time notifications for upcoming appointments
 • Secure document storage for medical records
 • Analytics dashboard for practice insights`,
@@ -28,85 +57,81 @@ Key features include:
         '/Portfolio_hamza/project1-2.jpg',
         '/Portfolio_hamza/project1-3.jpg',
       ],
-      video: '/Portfolio_hamza/project1-demo.mp4',
-      liveUrl: '#',
+      video: null,
+      liveUrl: null,
       githubUrl: 'https://github.com/hamzabenmarwen',
-      color: '#c9a227',
+      color: '#4a9eff',
     },
-    'hr-platform': {
-      title: 'HR Platform',
-      category: 'Enterprise System',
-      year: '2023',
-      client: 'Ciments Jbel Oust',
-      role: 'Web Developer',
-      duration: '1 month',
-      description: 'Complete HR solution with employee management, authentication, attendance tracking, and CRUD operations. Built during my improvement internship.',
-      longDescription: `This HR management platform was developed to modernize the human resources operations at Ciments Jbel Oust. The system replaced manual processes with a digital solution that improved efficiency and accuracy.
+    'service-apv': {
+      title: 'Service APV',
+      category: 'After-Sales Service Application',
+      year: '2025',
+      client: 'Academic Project',
+      role: 'Microservices Developer',
+      duration: '3 months',
+      description: 'A containerized microservices application for managing after-sales services, featuring ticket tracking, service dashboards, technician scheduling, and API Gateway routing.',
+      longDescription: `Service APV is an end-to-end after-sales service management system built using .NET Core microservices architecture. It allows companies to track and resolve customer service requests, manage spare parts, and allocate field technicians.
 
 Key features include:
-• Employee database with comprehensive profiles
-• Attendance tracking and leave management
-• Performance evaluation tools
-• Document management for contracts and policies
-• Reporting and analytics for HR metrics
-• Secure authentication with role-based permissions`,
-      technologies: ['Laravel', 'PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'jQuery'],
+• 4 containerized microservices (.NET Core)
+• API Gateway routing for unified endpoint access
+• SQL Server database per microservice
+• Frontend React dashboard with real-time updates via SignalR
+• Dockerized deployment for local and cloud environments`,
+      technologies: ['.NET Core', 'React', 'Docker', 'SQL Server', 'SignalR', 'Entity Framework'],
+      images: [
+        '/Portfolio_hamza/project3.jpg',
+        '/Portfolio_hamza/project3-2.jpg',
+        '/Portfolio_hamza/project3-3.jpg',
+      ],
+      video: null,
+      liveUrl: null,
+      githubUrl: 'https://github.com/hamzabenmarwen',
+      color: '#ff6b6b',
+    },
+    'gestion-ventes': {
+      title: 'Gestion des Ventes',
+      category: 'Sales Management System',
+      year: '2025',
+      client: 'Academic Project',
+      role: 'Microservices Developer',
+      duration: '2 months',
+      description: 'A containerized microservices platform for sales management, featuring inventory tracking, checkout, sales analytics, and Docker-compose orchestration.',
+      longDescription: `This sales management platform is structured around a Spring Boot microservices backend and an Angular frontend. It supports modern retail workflows by tracking stock levels, processing orders, and generating sales statistics.
+
+Key features include:
+• 3 microservices conteneurisés using Spring Boot
+• PostgreSQL databases for reliable transactions
+• Angular responsive interface for storefront and administration
+• Docker-compose configurations for orchestrating services`,
+      technologies: ['Spring Boot', 'Angular', 'Docker', 'PostgreSQL', 'Java', 'REST APIs'],
       images: [
         '/Portfolio_hamza/project2.jpg',
         '/Portfolio_hamza/project2-2.jpg',
         '/Portfolio_hamza/project2-3.jpg',
       ],
       video: null,
-      liveUrl: '#',
+      liveUrl: null,
       githubUrl: 'https://github.com/hamzabenmarwen',
-      color: '#4a9eff',
-    },
-    'service-apv': {
-      title: 'Service APV',
-      category: 'Management System',
-      year: '2024',
-      client: 'Enterprise Client',
-      role: 'Full Stack Developer',
-      duration: '3 months',
-      description: 'End-to-end service management with real-time tracking, reporting dashboard, and customer management.',
-      longDescription: `Service APV is a comprehensive after-sales service management system designed to optimize service operations and improve customer satisfaction.
-
-Key features include:
-• Service ticket management and tracking
-• Real-time status updates for customers
-• Technician assignment and scheduling
-• Inventory management for spare parts
-• Customer communication portal
-• Performance analytics and reporting`,
-      technologies: ['.NET', 'React', 'SQL Server', 'Azure', 'SignalR', 'Entity Framework'],
-      images: [
-        '/Portfolio_hamza/project3.jpg',
-        '/Portfolio_hamza/project3-2.jpg',
-        '/Portfolio_hamza/project3-3.jpg',
-      ],
-      video: '/Portfolio_hamza/project3-demo.mp4',
-      liveUrl: '#',
-      githubUrl: 'https://github.com/hamzabenmarwen',
-      color: '#ff6b6b',
+      color: '#50c878',
     },
     'portfolio': {
-      title: 'Portfolio',
-      category: 'Personal Website',
-      year: '2024',
+      title: '3D Portfolio',
+      category: 'Personal Portfolio',
+      year: '2025',
       client: 'Personal Project',
       role: 'Designer & Developer',
       duration: 'Ongoing',
-      description: 'Modern portfolio with smooth animations, immersive user experience, and responsive design.',
-      longDescription: `This portfolio website showcases my work and skills as a developer. Built with modern technologies and a focus on user experience, it features smooth animations and a clean, professional design.
+      description: 'An interactive, responsive 3D developer portfolio featuring smooth page transitions, custom cursors, a music player, and beautiful canvas animations.',
+      longDescription: `This portfolio website showcases my work, skills, and professional experiences. Built with modern technologies and a focus on premium animations, it provides an immersive browsing experience.
 
 Key features include:
-• Smooth page transitions and scroll animations
-• Responsive design for all devices
-• Dark theme with elegant typography
-• Project showcase with detailed pages
-• Contact form integration
-• Background music player`,
-      technologies: ['React', 'Framer Motion', 'Tailwind CSS', 'Vite', 'EmailJS'],
+• React Three Fiber (R3F) and Three.js canvas backgrounds
+• Smooth page transitions and scroll animations (Framer Motion, Lenis)
+• Dark mode design system with refined gold/black colors
+• Interactive background music player
+• EmailJS contact form integration`,
+      technologies: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS', 'Vite', 'EmailJS'],
       images: [
         '/Portfolio_hamza/project4.jpg',
         '/Portfolio_hamza/project4-2.jpg',
@@ -115,6 +140,84 @@ Key features include:
       video: null,
       liveUrl: 'https://hamzabenmarwen.github.io/Portfolio_hamza/',
       githubUrl: 'https://github.com/hamzabenmarwen/Portfolio_hamza',
+      color: '#c9a227',
+    },
+    'quiz-mobile': {
+      title: 'Quiz Mobile',
+      category: 'Biometric Mobile Application',
+      year: '2024',
+      client: 'Academic Project',
+      role: 'Mobile Developer',
+      duration: '2 months',
+      description: 'An educational quiz mobile app featuring biometric authentication via face recognition utilizing ML Kit and Firebase backend services.',
+      longDescription: `Quiz Mobile is a cross-platform mobile application built using Flutter. The application provides an engaging educational quiz experience with enhanced security measures.
+
+Key features include:
+• Biometric login via face recognition (ML Kit)
+• Firebase authentication and real-time database
+• Responsive, gamified mobile UI
+• Performance analytics and scoreboard tables`,
+      technologies: ['Flutter', 'ML Kit', 'Firebase', 'Dart', 'Mobile Authentication'],
+      images: [
+        '/Portfolio_hamza/project3.jpg',
+        '/Portfolio_hamza/project3-2.jpg',
+        '/Portfolio_hamza/project3-3.jpg',
+      ],
+      video: null,
+      liveUrl: null,
+      githubUrl: 'https://github.com/hamzabenmarwen',
+      color: '#ff6b6b',
+    },
+    'gestion-bibliotheque': {
+      title: 'Gestion de Bibliothèque',
+      category: 'Library Management System',
+      year: '2024',
+      client: 'Academic Project',
+      role: 'Backend Developer',
+      duration: '2 months',
+      description: 'A library management platform based on Symfony MVC architecture, featuring inventory controls, member registrations, and borrowing logs.',
+      longDescription: `This project provides an intuitive web platform for libraries to manage book collections, catalog directories, track borrow transactions, and manage user memberships.
+
+Key features include:
+• Symfony Framework with MVC architecture
+• MySQL database storage and queries
+• Book loan tracking, return scheduling, and email alerts
+• Role-based login for librarians and library members`,
+      technologies: ['Symfony', 'PHP', 'MySQL', 'Doctrine ORM', 'Twig'],
+      images: [
+        '/Portfolio_hamza/project2.jpg',
+        '/Portfolio_hamza/project2-2.jpg',
+        '/Portfolio_hamza/project2-3.jpg',
+      ],
+      video: null,
+      liveUrl: null,
+      githubUrl: 'https://github.com/hamzabenmarwen',
+      color: '#4a9eff',
+    },
+    'hr-platform': {
+      title: 'HR Platform',
+      category: 'Enterprise HR System',
+      year: '2023',
+      client: 'Ciments Jbel Oust',
+      role: 'Web Developer',
+      duration: '1 month',
+      description: 'A human resources administration platform for employee directories, attendance records, secure authentication, and leaves approval logs.',
+      longDescription: `Developed during my improvement internship at Ciments Jbel Oust, this HR management platform modernizes human resources workflows by digitizing employee leave requests, approvals, profiles, and attendance logging.
+
+Key features include:
+• Employee directories with profiles and details
+• Attendance registration and tracking
+• Leave requests workflow and approvals logging
+• Secure role-based credentials (HR Managers, Employees)`,
+      technologies: ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS', 'Alpine.js'],
+      images: [
+        '/Portfolio_hamza/project2.jpg',
+        '/Portfolio_hamza/project2-2.jpg',
+        '/Portfolio_hamza/project2-3.jpg',
+      ],
+      video: null,
+      liveUrl: null,
+      githubUrl: 'https://github.com/hamzabenmarwen',
       color: '#50c878',
     },
   }

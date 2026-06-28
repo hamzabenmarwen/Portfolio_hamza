@@ -15,18 +15,25 @@ const Experience = () => {
 
   const experiences = [
     {
+      title: 'Full-Stack / AI Developer',
+      company: 'Assiette Gourmande Sfaxienne',
+      type: 'Master\'s End-of-Studies Internship',
+      period: 'Feb 2026 - Jun 2026',
+      description: 'Developed an intelligent catering management platform with 6 microservices (Node.js + FastAPI), 4 PostgreSQL databases, and 5 AI modules (RAG chatbot, Prophet demand forecasting, dish recommendation, OCR, kitchen optimization). Implemented React/TypeScript frontend and Socket.IO real-time communication.',
+    },
+    {
       title: 'Full Stack Developer',
       company: 'IT GATE',
-      type: 'End-of-Studies Internship',
+      type: 'Licence End-of-Studies Internship',
       period: 'Feb 2024 - May 2024',
-      description: 'Built "Mon Cabinet", a medical office management platform using MERN stack with React, Node.js, and MongoDB for enterprise clients.',
+      description: 'Built "Mon Cabinet", a medical office management platform using the MERN stack (React, Node.js, MongoDB) for patient folders, RBAC roles, and appointments scheduling.',
     },
     {
       title: 'Web Developer',
       company: 'Ciments Jbel Oust',
       type: 'Improvement Internship',
       period: 'January 2023',
-      description: 'Developed HR management platform with authentication and responsive UI using Laravel, PHP, and MySQL.',
+      description: 'Developed an HR management platform with secure authentication, employee profiles, and leaves tracking using Laravel, Tailwind CSS, and MySQL.',
     },
     {
       title: 'Junior Developer',

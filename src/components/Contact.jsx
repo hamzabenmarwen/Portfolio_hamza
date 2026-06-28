@@ -163,7 +163,7 @@ const Contact = () => {
                   Github
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/"
+                  href="https://linkedin.com/in/hamzabenmarwen"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#888] hover:text-[#c9a227] text-sm tracking-wider uppercase transition-colors duration-300"

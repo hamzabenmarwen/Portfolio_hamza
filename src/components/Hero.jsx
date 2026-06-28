@@ -218,7 +218,7 @@ const Hero = () => {
         </a>
         <div className="w-px h-8 bg-[#333]" />
         <a
-          href="https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/"
+          href="https://linkedin.com/in/hamzabenmarwen"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em] uppercase"

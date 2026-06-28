@@ -10,32 +10,39 @@ const AboutPage = () => {
     offset: ['start end', 'end start']
   })
   const imageY = useTransform(scrollYProgress, [0, 1], [50, -50])
-
   const skills = [
-    { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-    { category: 'Backend', items: ['Node.js', 'Express', 'Laravel', 'PHP', '.NET'] },
-    { category: 'Database', items: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQL Server'] },
-    { category: 'Tools', items: ['Git', 'Docker', 'Figma', 'VS Code', 'Postman'] },
+    { category: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'PHP', 'SQL', 'HTML/CSS'] },
+    { category: 'Frontend', items: ['React', 'Angular', 'Flutter', 'Three.js', 'Tailwind CSS', 'Material UI'] },
+    { category: 'Backend', items: ['Node.js/Express', 'FastAPI', 'Spring Boot', 'Laravel', 'Symfony'] },
+    { category: 'AI & Data', items: ['LangChain', 'FAISS', 'Gemini API', 'Prophet', 'scikit-learn'] },
+    { category: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Oracle DB', 'Prisma ORM'] },
+    { category: 'Tools', items: ['Git', 'Docker', 'GitHub', 'Postman', 'Socket.IO', 'Figma', 'Linux'] },
   ]
 
   const experience = [
     {
+      title: 'Full-Stack / AI Developer',
+      company: 'Assiette Gourmande Sfaxienne',
+      period: 'Feb 2026 - Jun 2026',
+      description: 'Developed an intelligent catering management platform with 6 microservices (Node.js + FastAPI), 4 PostgreSQL databases, and 5 AI modules (RAG chatbot, Prophet demand forecasting, dish recommendation, OCR, kitchen optimization). Implemented React/TypeScript frontend and Socket.IO real-time communication.',
+    },
+    {
       title: 'Full Stack Developer',
       company: 'IT GATE',
       period: 'Feb 2024 - May 2024',
-      description: 'Built "Mon Cabinet", a comprehensive medical office management platform using the MERN stack.',
+      description: 'Built "Mon Cabinet", a medical office management platform using the MERN stack (React, Node.js, MongoDB) for patient folders, RBAC roles, and appointments scheduling.',
     },
     {
       title: 'Web Developer',
       company: 'Ciments Jbel Oust',
       period: 'January 2023',
-      description: 'Developed an HR management platform with authentication and responsive UI using Laravel.',
+      description: 'Developed an HR management platform with secure authentication, employee profiles, and leaves tracking using Laravel, Tailwind CSS, and MySQL.',
     },
     {
       title: 'Junior Developer',
       company: 'Institut National de la Statistique',
       period: 'January 2022',
-      description: 'First professional experience learning software development practices and workflows.',
+      description: 'First professional experience learning software development practices, workflows, and collaborative coding.',
     },
   ]
 
@@ -153,7 +160,7 @@ const AboutPage = () => {
             Skills & <span className="text-[#c9a227] italic">Expertise</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {skills.map((skillGroup, index) => (
               <motion.div
                 key={skillGroup.category}

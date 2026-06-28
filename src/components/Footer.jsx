@@ -31,9 +31,9 @@ const Footer = () => {
 
   const socials = [
     { name: 'Email', href: 'mailto:hamzabenmarwen@gmail.com' },
-    { name: 'Linkdin', href: 'https://www.linkedin.com/in/hamza-ben-marouen-29b6172a6/' },
-    { name: 'Whatsapp', href: 'https://wa.me/21612345678' },
-    { name: 'Github', href: 'https://github.com/hamzabenmarwen' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/hamzabenmarwen' },
+    { name: 'WhatsApp', href: 'https://wa.me/21653180702' },
+    { name: 'GitHub', href: 'https://github.com/hamzabenmarwen' },
   ]
 
   return (
@@ -100,10 +100,10 @@ const Footer = () => {
           {/* Contact Buttons - Right Side */}
           <div className="flex flex-col sm:flex-row gap-3 ml-auto">
             <a
-              href="tel:+21612345678"
+              href="tel:+21653180702"
               className="px-6 py-3 rounded-full bg-[#1a1a1a] text-white text-sm hover:bg-[#222] transition-colors whitespace-nowrap"
             >
-              +21612345678
+              +216 53 180 702
             </a>
             <a
               href="mailto:hamzabenmarwen@gmail.com"
