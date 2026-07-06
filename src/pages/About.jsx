@@ -19,6 +19,27 @@ const AboutPage = () => {
     { category: 'Tools', items: ['Git', 'Docker', 'GitHub', 'Postman', 'Socket.IO', 'Figma', 'Linux'] },
   ]
 
+  const education = [
+    {
+      degree: "Master DSIR",
+      full: "Développement des Systèmes Informatiques et Réseaux",
+      school: "ISET Sfax",
+      period: "2024 — 2026",
+    },
+    {
+      degree: "Licence en Technologies de l'Informatique",
+      full: "Spécialité DSI",
+      school: "ISET Kairouan",
+      period: "2021 — 2024",
+    },
+    {
+      degree: "Baccalauréat Sciences de l'Informatique",
+      full: "",
+      school: "Lycée Cité Nozha, Zaghouan",
+      period: "2021",
+    },
+  ]
+
   const experience = [
     {
       title: 'Full-Stack / AI Developer',
@@ -46,6 +67,14 @@ const AboutPage = () => {
     },
   ]
 
+  const certifications = [
+    {
+      name: 'Cisco CCNA',
+      detail: 'Modules 1, 2 & 3',
+      icon: '🏅',
+    },
+  ]
+
   return (
     <main className="min-h-screen bg-black pt-32 pb-20" ref={sectionRef}>
       <div className="container-custom">
@@ -63,7 +92,7 @@ const AboutPage = () => {
               className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#111]"
             >
               <img
-                src="/Portfolio_hamza/hamza.png"
+                src="/Portfolio_hamza/hamzaaaa.png"
                 alt="Hamza Ben Marouen"
                 className="w-full h-full object-cover"
               />
@@ -77,7 +106,7 @@ const AboutPage = () => {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -right-8 top-20 w-20 h-20 border border-[#c9a227] rounded-full flex items-center justify-center"
             >
-              <span className="text-[#c9a227] text-xs">4+ Years</span>
+              <span className="text-[#c9a227] text-xs">5+ Years</span>
             </motion.div>
           </motion.div>
 
@@ -97,13 +126,13 @@ const AboutPage = () => {
             
             <div className="space-y-6 text-[#888] text-lg leading-relaxed">
               <p>
-                Hello! I'm <span className="text-white">Hamza Ben Marouen</span>, a passionate Full Stack Developer based in Tunisia. I specialize in creating modern, responsive web applications that deliver exceptional user experiences.
+                Hello! I'm <span className="text-white">Hamza Ben Marouen</span>, a Full-Stack & AI Developer based in Tunisia. I specialize in creating modern, responsive web applications that deliver exceptional user experiences.
               </p>
               <p>
                 With a strong foundation in both frontend and backend technologies, I enjoy bringing ideas to life through clean code and thoughtful design. My journey in web development started with curiosity and has evolved into a deep passion for crafting digital solutions.
               </p>
               <p>
-                Currently pursuing my <span className="text-[#c9a227]">Master's in Computer Systems & Networks</span> at ISET Sfax, I'm constantly learning and staying up-to-date with the latest technologies and best practices in the industry.
+                Holder of a <span className="text-[#c9a227]">Master's degree in Computer Systems & Networks (DSIR)</span> from ISET Sfax, with 3 professional internships including building an AI-powered microservices platform. Available immediately for full-time opportunities.
               </p>
             </div>
 
@@ -121,7 +150,7 @@ const AboutPage = () => {
               </div>
               <div>
                 <p className="text-[#555] text-sm uppercase tracking-wider mb-2">Education</p>
-                <p className="text-white text-lg">Master's Student</p>
+                <p className="text-white text-lg">Master's Graduate (DSIR)</p>
               </div>
               <div>
                 <p className="text-[#555] text-sm uppercase tracking-wider mb-2">Languages</p>
@@ -145,6 +174,73 @@ const AboutPage = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Education Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="mb-32"
+        >
+          <h2 
+            className="text-4xl md:text-5xl font-light text-white mb-16"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Education <span className="text-[#c9a227] italic">& Certifications</span>
+          </h2>
+
+          <div className="space-y-8">
+            {education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                className="group relative pl-8 border-l border-[#222] hover:border-[#c9a227] transition-colors"
+              >
+                <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[#222] group-hover:bg-[#c9a227] transition-colors" />
+                
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                  <div>
+                    <h3 className="text-xl text-white group-hover:text-[#c9a227] transition-colors">
+                      {edu.degree}
+                    </h3>
+                    {edu.full && (
+                      <p className="text-[#888] text-sm">{edu.full}</p>
+                    )}
+                  </div>
+                  <p className="text-[#555] text-sm mt-1 md:mt-0">{edu.period}</p>
+                </div>
+                
+                <p className="text-[#c9a227] text-sm">{edu.school}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Certifications */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-12 pt-8 border-t border-[#222]"
+          >
+            <h3 className="text-[#555] text-xs tracking-[0.2em] uppercase mb-6">Certifications</h3>
+            <div className="flex flex-wrap gap-4">
+              {certifications.map((cert, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 px-6 py-3 border border-[#222] rounded-full hover:border-[#c9a227] transition-colors"
+                >
+                  <span className="text-lg">{cert.icon}</span>
+                  <div>
+                    <span className="text-white text-sm">{cert.name}</span>
+                    <span className="text-[#555] text-sm ml-2">— {cert.detail}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Skills Section */}
         <motion.div

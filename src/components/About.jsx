@@ -108,13 +108,13 @@ const About = () => {
               className="space-y-6 mb-12"
             >
               <p className="text-[#888] text-lg leading-relaxed">
-                I'm Hamza Ben Marouen, a Full Stack & AI Developer based in Zaghouan, Tunisia.
-                Currently pursuing my Master's in Development of Computer Systems and Networks.
+                I'm Hamza Ben Marouen, a Full-Stack & AI Developer based in Zaghouan, Tunisia.
+                Master's graduate in Computer Systems & Networks (DSIR) from ISET Sfax.
               </p>
               <p className="text-[#555] leading-relaxed">
-                Through internships at Assiette Gourmande Sfaxienne (Master PFE), IT GATE (Licence PFE), 
-                and Ciments Jbel Oust, I've built real-world applications and integrated advanced 
-                AI capabilities. I believe in clean code, thoughtful design, and creating solutions that matter.
+                With 3 professional internships — including building an AI-powered catering platform 
+                with 6 microservices and 5 AI modules — I specialize in modern web architectures 
+                and intelligent applications. Available immediately for full-time opportunities.
               </p>
             </motion.div>
 
@@ -127,8 +127,8 @@ const About = () => {
               className="grid grid-cols-3 gap-8 py-8 border-t border-b border-[#222]"
             >
               {[
-                { number: '4+', label: 'Years Learning' },
-                { number: '10+', label: 'Projects Built' },
+                { number: '5+', label: 'Years Coding' },
+                { number: '8+', label: 'Projects Built' },
                 { number: '3', label: 'Internships' },
               ].map((stat, index) => (
                 <div key={index}>
@@ -183,7 +183,7 @@ const About = () => {
               className="relative aspect-[3/4] overflow-hidden"
             >
               <img 
-                src={`${import.meta.env.BASE_URL}hamza.png`} 
+                src={`${import.meta.env.BASE_URL}hamzaaaa.png`} 
                 alt="Hamza Ben Marouen"
                 className="w-full h-full object-cover"
               />

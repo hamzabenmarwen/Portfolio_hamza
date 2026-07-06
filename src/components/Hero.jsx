@@ -160,7 +160,8 @@ const Hero = () => {
           className="mt-16 md:mt-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
         >
           <p className="max-w-md text-[#888] text-base leading-relaxed">
-            Building thoughtful digital experiences with clean code 
+            Full-Stack & AI developer with 3 professional internships.
+            Building intelligent web applications with microservices
             and modern technologies. Based in Tunisia.
           </p>
           

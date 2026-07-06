@@ -175,8 +175,8 @@ const Contact = () => {
 
             {/* Availability */}
             <div className="inline-flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
-              <span className="text-[#888] text-sm">Available for new projects</span>
+              <span className="w-2 h-2 rounded-full bg-[#c9a227] animate-pulse" />
+              <span className="text-[#888] text-sm">Available immediately — open to full-time roles</span>
             </div>
           </motion.div>
 

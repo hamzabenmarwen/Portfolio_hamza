@@ -14,7 +14,7 @@ const Footer = () => {
         hour12: true,
         timeZone: 'Africa/Tunis'
       })
-      setLocalTime(`${timeString} UTC+2`)
+      setLocalTime(`${timeString} UTC+1`)
     }
     
     updateTime()
