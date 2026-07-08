@@ -14,6 +14,7 @@ import Home from './pages/Home'
 import Work from './pages/Work'
 import About from './pages/About'
 import ProjectDetail from './pages/ProjectDetail'
+import NotFound from './pages/NotFound'
 
 // Context to track navigation
 const NavigationContext = createContext({ hasNavigated: false, setHasNavigated: () => {} })
@@ -146,6 +147,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition pageName="About" showTransition={showTransition}>
               <About />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition pageName="404" showTransition={showTransition}>
+              <NotFound />
             </PageTransition>
           }
         />

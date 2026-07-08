@@ -82,7 +82,7 @@ const Hero = () => {
           variants={fadeVariants}
           initial="hidden"
           animate="visible"
-          className="flex justify-between items-start mb-16 md:mb-24"
+          className="flex justify-between items-start mb-16 md:mb-24 pt-28"
         >
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
@@ -132,7 +132,7 @@ const Hero = () => {
               className="hidden md:inline-block text-[#c9a227] text-lg md:text-xl italic"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              — Full Stack Developer
+              — Full-Stack & AI Developer
             </motion.span>
           </div>
           

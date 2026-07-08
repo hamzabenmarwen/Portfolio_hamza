@@ -106,7 +106,7 @@ const AboutPage = () => {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -right-8 top-20 w-20 h-20 border border-[#c9a227] rounded-full flex items-center justify-center"
             >
-              <span className="text-[#c9a227] text-xs">5+ Years</span>
+              <span className="text-[#c9a227] text-xs">3 Internships</span>
             </motion.div>
           </motion.div>
 

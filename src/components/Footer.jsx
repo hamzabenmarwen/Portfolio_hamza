@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -23,10 +24,9 @@ const Footer = () => {
   }, [])
 
   const links = [
-    { name: 'Home', href: '#home' },
-    { name: 'Work', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', to: '/' },
+    { name: 'Work', to: '/work' },
+    { name: 'About', to: '/about' },
   ]
 
   const socials = [
@@ -49,12 +49,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {links.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.to}
                     className="text-white hover:text-[#888] transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

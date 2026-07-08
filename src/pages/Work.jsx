@@ -14,7 +14,7 @@ const Work = () => {
       description: 'An intelligent microservices platform featuring 6 services (Node.js/FastAPI), 4 PostgreSQL databases, and 5 AI modules (RAG chatbot with Gemini & FAISS, Prophet demand forecasting, meal recommendation, kitchen OCR, optimization). Built with React/TypeScript, Socket.IO, and Flouci payment integration.',
       tags: ['React', 'Node.js', 'FastAPI', 'PostgreSQL', 'AI RAG', 'Prophet'],
       year: '2026',
-      image: '/Portfolio_hamza/project1.jpg',
+      image: '/Portfolio_hamza/assiette-main.jpg',
       color: '#c9a227',
     },
     {
@@ -24,7 +24,7 @@ const Work = () => {
       description: 'A comprehensive MERN stack platform for managing medical practices, featuring role-based access control (RBAC), patient history management, appointment scheduling, and real-time notification alerts.',
       tags: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
       year: '2024',
-      image: '/Portfolio_hamza/project1.jpg',
+      image: '/Portfolio_hamza/cabinet-main.jpg',
       color: '#4a9eff',
     },
     {
@@ -34,7 +34,7 @@ const Work = () => {
       description: 'A containerized microservices application for managing after-sales services, featuring ticket tracking, service dashboards, technician scheduling, and API Gateway routing.',
       tags: ['.NET Core', 'React', 'Docker', 'SQL Server', 'API Gateway'],
       year: '2025',
-      image: '/Portfolio_hamza/project3.jpg',
+      image: '/Portfolio_hamza/apv-main.jpg',
       color: '#ff6b6b',
     },
     {
@@ -44,7 +44,7 @@ const Work = () => {
       description: 'A containerized microservices platform for sales management, featuring inventory tracking, checkout, sales analytics, and Docker-compose orchestration.',
       tags: ['Spring Boot', 'Angular', 'Docker', 'PostgreSQL'],
       year: '2025',
-      image: '/Portfolio_hamza/project2.jpg',
+      image: '/Portfolio_hamza/ventes-main.jpg',
       color: '#50c878',
     },
     {
@@ -54,7 +54,7 @@ const Work = () => {
       description: 'An interactive, responsive 3D developer portfolio featuring smooth page transitions, custom cursors, a music player, and beautiful canvas animations.',
       tags: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
       year: '2025',
-      image: '/Portfolio_hamza/project4.jpg',
+      image: '/Portfolio_hamza/portfolio-main.jpg',
       color: '#c9a227',
     },
     {
@@ -64,7 +64,7 @@ const Work = () => {
       description: 'An educational quiz mobile app featuring biometric authentication via face recognition utilizing ML Kit and Firebase backend services.',
       tags: ['Flutter', 'ML Kit', 'Firebase', 'Mobile Development'],
       year: '2024',
-      image: '/Portfolio_hamza/project3.jpg',
+      image: '/Portfolio_hamza/quiz-main.jpg',
       color: '#ff6b6b',
     },
     {
@@ -74,7 +74,7 @@ const Work = () => {
       description: 'A library management platform based on Symfony MVC architecture, featuring inventory controls, member registrations, and borrowing logs.',
       tags: ['Symfony', 'PHP', 'MySQL', 'MVC Architecture'],
       year: '2024',
-      image: '/Portfolio_hamza/project2.jpg',
+      image: '/Portfolio_hamza/biblio-main.jpg',
       color: '#4a9eff',
     },
     {
@@ -84,7 +84,7 @@ const Work = () => {
       description: 'A human resources administration platform for employee directories, attendance records, secure authentication, and leaves approval logs.',
       tags: ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
       year: '2023',
-      image: '/Portfolio_hamza/project2.jpg',
+      image: '/Portfolio_hamza/hr-main.jpg',
       color: '#50c878',
     },
   ]
@@ -120,7 +120,7 @@ const Work = () => {
           <div className="flex animate-marquee whitespace-nowrap">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="flex items-center mx-8">
-                <div className="w-16 h-10 bg-[#222] rounded-lg mr-4" />
+                <span className="text-[#c9a227] text-lg mr-4">✦</span>
                 <span className="text-white text-lg tracking-wider uppercase">
                   FEATURED PROJECT
                 </span>
@@ -219,7 +219,7 @@ const Work = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }

@@ -127,28 +127,42 @@ const Navbar = () => {
             <div className="container-custom">
               <div className="space-y-4">
                 {[
-                  { name: 'Home', href: '#home' },
-                  { name: 'About', href: '#about' },
-                  { name: 'Work', href: '#projects' },
-                  { name: 'Experience', href: '#experience' },
-                  { name: 'Contact', href: '#contact' },
+                  { name: 'Home', href: '/', isRoute: true },
+                  { name: 'Work', href: '/work', isRoute: true },
+                  { name: 'About', href: '/about', isRoute: true },
+                  { name: 'Contact', href: '#contact', isRoute: false },
                 ].map((link, index) => (
                   <div key={link.name} className="overflow-hidden">
-                    <motion.a
-                      href={link.href}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        scrollToSection(link.href)
-                      }}
-                      initial={{ y: '100%' }}
-                      animate={{ y: 0 }}
-                      exit={{ y: '100%' }}
-                      transition={{ delay: index * 0.05, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                      className="block text-5xl md:text-7xl font-light text-white hover:text-[#c9a227] transition-colors tracking-[-0.02em]"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
-                    >
-                      {link.name}
-                    </motion.a>
+                    {link.isRoute ? (
+                      <Link to={link.href} onClick={() => setIsMenuOpen(false)}>
+                        <motion.span
+                          initial={{ y: '100%' }}
+                          animate={{ y: 0 }}
+                          exit={{ y: '100%' }}
+                          transition={{ delay: index * 0.05, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+                          className="block text-5xl md:text-7xl font-light text-white hover:text-[#c9a227] transition-colors tracking-[-0.02em]"
+                          style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                          {link.name}
+                        </motion.span>
+                      </Link>
+                    ) : (
+                      <motion.a
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          scrollToSection(link.href)
+                        }}
+                        initial={{ y: '100%' }}
+                        animate={{ y: 0 }}
+                        exit={{ y: '100%' }}
+                        transition={{ delay: index * 0.05, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+                        className="block text-5xl md:text-7xl font-light text-white hover:text-[#c9a227] transition-colors tracking-[-0.02em]"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        {link.name}
+                      </motion.a>
+                    )}
                   </div>
                 ))}
               </div>
