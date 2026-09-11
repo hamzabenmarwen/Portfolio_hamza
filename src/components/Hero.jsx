@@ -58,7 +58,7 @@ const Hero = () => {
     <section
       id="home"
       ref={sectionRef}
-      className="relative h-screen flex items-center overflow-hidden bg-black"
+      className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 md:pt-28 md:pb-16 bg-black overflow-hidden"
     >
       {/* Subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#0d0d0d]" />
@@ -74,7 +74,7 @@ const Hero = () => {
       {/* Main Content */}
       <motion.div 
         style={{ y, opacity, scale }}
-        className="relative z-10 w-full container-custom"
+        className="relative z-10 w-full container-custom flex-1 flex flex-col justify-between py-4 md:py-6"
       >
         {/* Top Row */}
         <motion.div
@@ -82,7 +82,7 @@ const Hero = () => {
           variants={fadeVariants}
           initial="hidden"
           animate="visible"
-          className="flex justify-between items-start mb-16 md:mb-24 pt-28"
+          className="flex justify-between items-start mb-6 md:mb-10"
         >
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
@@ -97,7 +97,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Main Title */}
-        <div className="space-y-4">
+        <div className="space-y-2 md:space-y-4 my-auto">
           {/* Line 1 */}
           <div className="overflow-hidden">
             <motion.h1
@@ -105,7 +105,7 @@ const Hero = () => {
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Hamza
@@ -113,13 +113,13 @@ const Hero = () => {
           </div>
           
           {/* Line 2 */}
-          <div className="overflow-hidden flex items-baseline gap-8">
+          <div className="overflow-hidden flex items-baseline gap-4 md:gap-8">
             <motion.h1
               custom={1}
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Ben
@@ -143,7 +143,7 @@ const Hero = () => {
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light text-[#888] leading-[0.9] tracking-[-0.03em]"
+              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-[#888] leading-[0.9] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Marouen
@@ -157,9 +157,9 @@ const Hero = () => {
           variants={fadeVariants}
           initial="hidden"
           animate="visible"
-          className="mt-16 md:mt-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
+          className="mt-6 md:mt-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 pb-2 md:pb-4"
         >
-          <p className="max-w-md text-[#888] text-base leading-relaxed">
+          <p className="max-w-md text-[#888] text-sm md:text-base leading-relaxed">
             Full-Stack & AI developer with 3 professional internships.
             Building intelligent web applications with microservices
             and modern technologies. Based in Tunisia.
@@ -172,7 +172,7 @@ const Hero = () => {
             <span className="text-[#888] text-xs tracking-[0.15em] uppercase group-hover:text-[#c9a227] transition-colors duration-500">
               View Work
             </span>
-            <div className="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] group-hover:bg-[#c9a227]/10 transition-all duration-500">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] group-hover:bg-[#c9a227]/10 transition-all duration-500">
               <svg 
                 className="w-4 h-4 text-[#888] group-hover:text-[#c9a227] rotate-90 transition-all duration-500" 
                 fill="none" 
@@ -191,13 +191,13 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4 pointer-events-none z-20"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="w-px h-16 bg-gradient-to-b from-[#c9a227] to-transparent" />
+          <div className="w-px h-12 bg-gradient-to-b from-[#c9a227] to-transparent" />
         </motion.div>
       </motion.div>
 
