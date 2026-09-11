@@ -1,32 +1,17 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const Hero = () => {
   const sectionRef = useRef(null)
-  const [time, setTime] = useState('')
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end start']
+    offset: ['start start', 'end start'],
   })
-  
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
 
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      setTime(now.toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        timeZone: 'Africa/Tunis'
-      }))
-    }
-    updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
-  }, [])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '35%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.96])
 
   // Text animation variants
   const lineVariants = {
@@ -34,15 +19,15 @@ const Hero = () => {
     visible: (i) => ({
       y: '0%',
       transition: {
-        duration: 1.2,
-        delay: 0.8 + i * 0.15,
+        duration: 1.1,
+        delay: 0.2 + i * 0.12,
         ease: [0.76, 0, 0.24, 1],
       },
     }),
   }
 
   const fadeVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: (delay) => ({
       opacity: 1,
       y: 0,
@@ -58,46 +43,26 @@ const Hero = () => {
     <section
       id="home"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 md:pt-28 md:pb-16 bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-24 bg-black overflow-hidden"
     >
-      {/* Subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#0d0d0d]" />
-      
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-[#080808] to-[#121212]" />
+
       {/* Grain overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
       {/* Main Content */}
-      <motion.div 
+      <motion.div
         style={{ y, opacity, scale }}
-        className="relative z-10 w-full container-custom flex-1 flex flex-col justify-between py-4 md:py-6"
+        className="relative z-10 w-full container-custom my-auto flex flex-col justify-center"
       >
-        {/* Top Row */}
-        <motion.div
-          custom={0}
-          variants={fadeVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex justify-between items-start mb-6 md:mb-10"
-        >
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-[#c9a227]" />
-            <span className="text-[#888] text-xs tracking-[0.15em] uppercase">
-              Available for work
-            </span>
-          </div>
-          <div className="text-right hidden md:block">
-            <p className="text-[#555] text-xs tracking-[0.15em] uppercase mb-1">Local Time</p>
-            <p className="text-white text-sm font-mono">{time}</p>
-          </div>
-        </motion.div>
-
-        {/* Main Title */}
-        <div className="space-y-2 md:space-y-4 my-auto">
+        {/* Main Title Stack */}
+        <div className="space-y-1 md:space-y-3">
           {/* Line 1 */}
           <div className="overflow-hidden">
             <motion.h1
@@ -105,37 +70,37 @@ const Hero = () => {
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              className="text-[12vw] md:text-[9.5vw] lg:text-[8vw] font-light text-white leading-[0.88] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Hamza
             </motion.h1>
           </div>
-          
+
           {/* Line 2 */}
-          <div className="overflow-hidden flex items-baseline gap-4 md:gap-8">
+          <div className="overflow-hidden flex items-baseline gap-4 md:gap-8 flex-wrap">
             <motion.h1
               custom={1}
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-white leading-[0.9] tracking-[-0.03em]"
+              className="text-[12vw] md:text-[9.5vw] lg:text-[8vw] font-light text-white leading-[0.88] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Ben
             </motion.h1>
             <motion.span
-              custom={2}
+              custom={0.6}
               variants={fadeVariants}
               initial="hidden"
               animate="visible"
-              className="hidden md:inline-block text-[#c9a227] text-lg md:text-xl italic"
+              className="inline-block text-[#c9a227] text-base md:text-xl lg:text-2xl italic font-serif"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               — Full-Stack & AI Developer
             </motion.span>
           </div>
-          
+
           {/* Line 3 */}
           <div className="overflow-hidden">
             <motion.h1
@@ -143,7 +108,7 @@ const Hero = () => {
               variants={lineVariants}
               initial="hidden"
               animate="visible"
-              className="text-[11vw] md:text-[8.5vw] lg:text-[7vw] font-light text-[#888] leading-[0.9] tracking-[-0.03em]"
+              className="text-[12vw] md:text-[9.5vw] lg:text-[8vw] font-light text-[#777] leading-[0.88] tracking-[-0.03em]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Marouen
@@ -151,78 +116,68 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Bottom Row */}
+        {/* Bottom Hero Details Row */}
         <motion.div
-          custom={2.5}
+          custom={0.8}
           variants={fadeVariants}
           initial="hidden"
           animate="visible"
-          className="mt-6 md:mt-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 pb-2 md:pb-4"
+          className="mt-12 md:mt-16 lg:mt-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-8 border-t border-white/10"
         >
-          <p className="max-w-md text-[#888] text-sm md:text-base leading-relaxed">
+          <p className="max-w-xl text-[#999] text-base md:text-lg leading-relaxed font-light">
             Full-Stack & AI developer with 3 professional internships.
             Building intelligent web applications with microservices
-            and modern technologies. Based in Tunisia.
+            and modern AI architectures. Based in Tunisia.
           </p>
-          
+
           <a
             href="#projects"
-            className="group flex items-center gap-4"
+            className="group flex items-center gap-4 py-2"
           >
-            <span className="text-[#888] text-xs tracking-[0.15em] uppercase group-hover:text-[#c9a227] transition-colors duration-500">
+            <span className="text-[#aaa] text-xs md:text-sm tracking-[0.18em] uppercase group-hover:text-[#c9a227] transition-colors duration-300 font-medium">
               View Work
             </span>
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#333] flex items-center justify-center group-hover:border-[#c9a227] group-hover:bg-[#c9a227]/10 transition-all duration-500">
-              <svg 
-                className="w-4 h-4 text-[#888] group-hover:text-[#c9a227] rotate-90 transition-all duration-500" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+            <div className="w-11 h-11 md:w-13 md:h-13 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#c9a227] group-hover:bg-[#c9a227]/10 transition-all duration-300">
+              <svg
+                className="w-4 h-4 text-[#aaa] group-hover:text-[#c9a227] rotate-90 transition-all duration-300 group-hover:translate-y-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
               </svg>
             </div>
           </a>
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Side Vertical Social Links */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4 pointer-events-none z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-[#c9a227] to-transparent" />
-        </motion.div>
-      </motion.div>
-
-      {/* Side Elements */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-6 z-20"
       >
         <a
           href="https://github.com/hamzabenmarwen"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em] uppercase"
+          className="text-[#666] hover:text-[#c9a227] transition-colors duration-300 text-[10px] tracking-[0.2em] uppercase font-mono"
           style={{ writingMode: 'vertical-rl' }}
         >
           Github
         </a>
-        <div className="w-px h-8 bg-[#333]" />
+        <div className="w-px h-8 bg-white/10" />
         <a
           href="https://linkedin.com/in/hamzabenmarwen"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em] uppercase"
+          className="text-[#666] hover:text-[#c9a227] transition-colors duration-300 text-[10px] tracking-[0.2em] uppercase font-mono"
           style={{ writingMode: 'vertical-rl' }}
         >
           LinkedIn
@@ -232,12 +187,12 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:block z-20"
       >
         <a
           href="mailto:hamzabenmarwen@gmail.com"
-          className="text-[#555] hover:text-[#c9a227] transition-colors duration-500 text-[10px] tracking-[0.2em]"
+          className="text-[#666] hover:text-[#c9a227] transition-colors duration-300 text-[10px] tracking-[0.2em] font-mono"
           style={{ writingMode: 'vertical-rl' }}
         >
           hamzabenmarwen@gmail.com
@@ -248,5 +203,3 @@ const Hero = () => {
 }
 
 export default Hero
-
-

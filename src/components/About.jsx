@@ -40,7 +40,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-32 md:py-48 bg-black overflow-hidden"
+      className="relative py-20 md:py-28 bg-black overflow-hidden"
     >
       <div className="container-custom">
         {/* Section Label */}

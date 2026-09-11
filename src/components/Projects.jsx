@@ -59,7 +59,7 @@ const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-32 md:py-48 bg-black overflow-hidden"
+      className="relative py-20 md:py-28 bg-black overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       <div className="container-custom">
