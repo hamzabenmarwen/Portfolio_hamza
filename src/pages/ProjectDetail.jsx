@@ -10,7 +10,7 @@ const ProjectDetail = () => {
       category: 'Smart Catering Platform (Master PFE)',
       year: '2026',
       client: 'Assiette Gourmande Sfaxienne',
-      role: 'Full-Stack & AI Developer',
+      role: 'Full-Stack Developer',
       duration: '5 months',
       description: 'An intelligent microservices platform featuring a RAG chatbot, Prophet demand forecasting, meal recommendation, kitchen OCR, and kitchen optimization.',
       longDescription: `Assiette Gourmande is a smart catering platform that brings cutting-edge artificial intelligence to restaurant and Traiteur management. The system is split into 6 decoupled microservices built using Node.js/Express and FastAPI, coordinating across 4 PostgreSQL databases.

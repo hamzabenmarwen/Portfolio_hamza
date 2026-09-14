@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 const experiences = [
   {
     company: 'Assiette Gourmande Sfaxienne',
-    title: 'Full-Stack / AI Developer',
+    title: 'Full-Stack Developer',
     type: "Master's End-of-Studies Internship",
     period: 'Feb 2026 — Jun 2026',
     description:

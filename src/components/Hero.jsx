@@ -97,7 +97,7 @@ const Hero = () => {
               className="inline-block text-[#c9a227] text-base md:text-xl lg:text-2xl italic font-serif"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              — Full-Stack & AI Developer
+              — Full-Stack Developer
             </motion.span>
           </div>
 
@@ -125,9 +125,8 @@ const Hero = () => {
           className="mt-12 md:mt-16 lg:mt-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-8 border-t border-white/10"
         >
           <p className="max-w-xl text-[#999] text-base md:text-lg leading-relaxed font-light">
-            Full-Stack & AI developer with 3 professional internships.
-            Building intelligent web applications with microservices
-            and modern AI architectures. Based in Tunisia.
+            Full-Stack Developer with 3 professional internships. Crafting modern,
+            scalable web applications with microservices and a passion for integrating AI capabilities. Based in Tunisia.
           </p>
 
           <a

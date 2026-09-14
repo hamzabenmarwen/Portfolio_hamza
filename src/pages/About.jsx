@@ -42,7 +42,7 @@ const AboutPage = () => {
 
   const experience = [
     {
-      title: 'Full-Stack / AI Developer',
+      title: 'Full-Stack Developer',
       company: 'Assiette Gourmande Sfaxienne',
       period: 'Feb 2026 - Jun 2026',
       description: 'Developed an intelligent catering management platform with 6 microservices (Node.js + FastAPI), 4 PostgreSQL databases, and 5 AI modules (RAG chatbot, Prophet demand forecasting, dish recommendation, OCR, kitchen optimization). Implemented React/TypeScript frontend and Socket.IO real-time communication.',
@@ -126,13 +126,13 @@ const AboutPage = () => {
             
             <div className="space-y-6 text-[#888] text-lg leading-relaxed">
               <p>
-                Hello! I'm <span className="text-white">Hamza Ben Marouen</span>, a Full-Stack & AI Developer based in Tunisia. I specialize in creating modern, responsive web applications that deliver exceptional user experiences.
+                Hello! I'm <span className="text-white">Hamza Ben Marouen</span>, a Full-Stack Developer based in Tunisia. I specialize in creating modern, responsive web applications that deliver exceptional user experiences.
               </p>
               <p>
-                With a strong foundation in both frontend and backend technologies, I enjoy bringing ideas to life through clean code and thoughtful design. My journey in web development started with curiosity and has evolved into a deep passion for crafting digital solutions.
+                With a strong foundation in both frontend and backend technologies, I enjoy bringing ideas to life through clean code, scalable microservices, and thoughtful design. In addition to core full-stack development, I have hands-on skills in AI integration (RAG chatbots, forecasting, OCR) and love continuously learning more about cutting-edge AI capabilities.
               </p>
               <p>
-                Holder of a <span className="text-[#c9a227]">Master's degree in Computer Systems & Networks (DSIR)</span> from ISET Sfax, with 3 professional internships including building an AI-powered microservices platform. Available immediately for full-time opportunities.
+                Holder of a <span className="text-[#c9a227]">Master's degree in Computer Systems & Networks (DSIR)</span> from ISET Sfax, with 3 professional internships. Available immediately for full-time opportunities.
               </p>
             </div>
 

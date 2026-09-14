@@ -108,13 +108,13 @@ const About = () => {
               className="space-y-6 mb-12"
             >
               <p className="text-[#888] text-lg leading-relaxed">
-                I'm Hamza Ben Marouen, a Full-Stack & AI Developer based in Zaghouan, Tunisia.
+                I'm Hamza Ben Marouen, a Full-Stack Developer based in Zaghouan, Tunisia.
                 Master's graduate in Computer Systems & Networks (DSIR) from ISET Sfax.
               </p>
               <p className="text-[#555] leading-relaxed">
-                With 3 professional internships — including building an AI-powered catering platform 
-                with 6 microservices and 5 AI modules — I specialize in modern web architectures 
-                and intelligent applications. Available immediately for full-time opportunities.
+                With 3 professional internships under my belt, I specialize in full-stack web architectures,
+                clean APIs, and scalable systems. I also have hands-on experience integrating AI features
+                (such as RAG chatbots, forecasting models, and OCR) and continuously love discovering more about AI. Available immediately for full-time opportunities.
               </p>
             </motion.div>
 
