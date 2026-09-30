@@ -169,7 +169,7 @@ function App() {
   const [hasNavigated, setHasNavigated] = useState(false)
 
   return (
-    <Router basename="/Portfolio_hamza">
+    <Router>
       <NavigationContext.Provider value={{ hasNavigated, setHasNavigated }}>
         <div ref={appRef} className="relative">
           <Loader onComplete={() => setIsLoading(false)} />

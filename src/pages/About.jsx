@@ -92,7 +92,7 @@ const AboutPage = () => {
               className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#111]"
             >
               <img
-                src="/Portfolio_hamza/hamzaaaa.png"
+                src="/hamzaaaa.png"
                 alt="Hamza Ben Marouen"
                 className="w-full h-full object-cover"
               />

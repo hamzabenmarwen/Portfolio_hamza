@@ -15,7 +15,7 @@ const Projects = () => {
       category: 'Smart Catering Platform (Master PFE)',
       tags: ['React', 'FastAPI', 'Node.js', 'AI RAG'],
       year: '2026',
-      image: '/Portfolio_hamza/assiette-main.jpg',
+      image: '/assiette-main.jpg',
     },
     {
       id: 'mon-cabinet',
@@ -23,7 +23,7 @@ const Projects = () => {
       category: 'Medical Management App (Licence PFE)',
       tags: ['React', 'Node.js', 'MongoDB', 'Express'],
       year: '2024',
-      image: '/Portfolio_hamza/cabinet-main.jpg',
+      image: '/cabinet-main.jpg',
     },
     {
       id: 'service-apv',
@@ -31,7 +31,7 @@ const Projects = () => {
       category: 'After-Sales Service Microservices',
       tags: ['.NET Core', 'React', 'Docker', 'SQL Server'],
       year: '2025',
-      image: '/Portfolio_hamza/apv-main.jpg',
+      image: '/apv-main.jpg',
     },
     {
       id: 'gestion-ventes',
@@ -39,7 +39,7 @@ const Projects = () => {
       category: 'Sales Management Microservices',
       tags: ['Spring Boot', 'Angular', 'Docker', 'PostgreSQL'],
       year: '2025',
-      image: '/Portfolio_hamza/ventes-main.jpg',
+      image: '/ventes-main.jpg',
     },
     {
       id: 'portfolio',
@@ -47,7 +47,7 @@ const Projects = () => {
       category: 'Interactive 3D Portfolio',
       tags: ['React', 'Three.js', 'Framer Motion', 'Tailwind'],
       year: '2025',
-      image: '/Portfolio_hamza/portfolio-main.jpg',
+      image: '/portfolio-main.jpg',
     },
   ]
 
