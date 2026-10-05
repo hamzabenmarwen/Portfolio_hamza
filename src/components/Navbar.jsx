@@ -72,11 +72,10 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${isScrolled
             ? 'bg-black/90 backdrop-blur-md border-white/10 py-4'
             : 'bg-transparent border-white/5 py-5'
-        }`}
+          }`}
       >
         <div className="container-custom flex items-center justify-between gap-4">
           {/* Brand & Availability */}
@@ -92,7 +91,7 @@ const Navbar = () => {
             <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] text-[#aaa] tracking-[0.12em] uppercase font-mono">
-                Available for work
+                Open to New Opportunities
               </span>
             </div>
           </div>
@@ -104,11 +103,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 font-medium ${
-                    location.pathname === link.href
+                  className={`text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 font-medium ${location.pathname === link.href
                       ? 'text-[#c9a227]'
                       : 'text-[#888] hover:text-white'
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -147,19 +145,16 @@ const Navbar = () => {
               <span>{isMenuOpen ? 'Close' : 'Menu'}</span>
               <div className="w-5 h-3.5 relative flex flex-col justify-between">
                 <span
-                  className={`w-full h-px bg-current transition-all duration-300 ${
-                    isMenuOpen ? 'rotate-45 translate-y-[6px]' : ''
-                  }`}
+                  className={`w-full h-px bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[6px]' : ''
+                    }`}
                 />
                 <span
-                  className={`w-full h-px bg-current transition-all duration-300 ${
-                    isMenuOpen ? 'opacity-0' : ''
-                  }`}
+                  className={`w-full h-px bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''
+                    }`}
                 />
                 <span
-                  className={`w-full h-px bg-current transition-all duration-300 ${
-                    isMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''
-                  }`}
+                  className={`w-full h-px bg-current transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''
+                    }`}
                 />
               </div>
             </button>
